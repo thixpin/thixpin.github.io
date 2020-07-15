@@ -447,7 +447,7 @@ export const projects = [
         arr: [
             {
                 title: 'CDD MIS',
-                logo: 'https://lh3.googleusercontent.com/oS6FsujZQRg5F8iP6bf021Sv4I1cmhuOeFzsJMpgdhXa9taJWuZxsPNGH9jwZgKx3A=s180-rw',
+                logo: 'http://3.bp.blogspot.com/-1Mz4qza0D6Y/U38UVF_NSmI/AAAAAAAAOg0/765hNBFiv-A/s1600/logo_only1.jpg',
                 desc: 'Data collection app for CDD MIS System',
                 link: 'https://play.google.com/store/apps/details?id=com.ncddmis.y7'
             },
@@ -491,11 +491,7 @@ export const contactInfos = [
     {
         text: "Contact me",
         arr: [
-            {
-                title: 'Skype',
-                logo: 'https://image.flaticon.com/icons/svg/174/174869.svg',
-                link: 'thixpin'
-            },
+            
             // {
             //     title: 'WhatsApp',
             //     logo: 'https://image.flaticon.com/icons/svg/733/733585.svg',
@@ -506,16 +502,11 @@ export const contactInfos = [
             //     logo: 'https://assetsv2.fiverrcdn.com/assets/v2_globals/fiverr-logo-new-green-64920d4e75a1e04f4fc7988365357c16.png',
             //     link: ''
             // },
-            {
-                title: 'Google Play',
-                logo: 'https://www.vectorlogo.zone/logos/google_play/google_play-icon.svg',
-                link: 'https://play.google.com/store/apps/developer?id=thixpin&hl=en'
-            },
-            {
-                title: 'Facebook',
-                logo: 'https://image.flaticon.com/icons/svg/124/124010.svg',
-                link: 'https://fb.com/thixpin'
-            },
+            // {
+            //     title: 'Facebook',
+            //     logo: 'https://image.flaticon.com/icons/svg/124/124010.svg',
+            //     link: 'https://fb.com/thixpin'
+            // },
             // {
             //     title: 'YouTube',
             //     logo: 'https://lh3.googleusercontent.com/lMoItBgdPPVDJsNOVtP26EKHePkwBg-PkuY9NOrc-fumRtTFP4XhpUNk_22syN4Datc',
@@ -532,6 +523,21 @@ export const contactInfos = [
                 link: 'https://profiles.wordpress.org/thixpin/#content-plugins'
             },
             {
+                title: 'LinkedIn',
+                logo: 'https://image.flaticon.com/icons/svg/174/174857.svg',
+                link: 'https://www.linkedin.com/in/thixpin/'
+            },
+            {
+                title: 'Twitter',
+                logo: 'https://image.flaticon.com/icons/svg/733/733579.svg',
+                link: 'https://twitter.com/thixpin'
+            },
+            {
+                title: 'Google Play',
+                logo: 'https://www.vectorlogo.zone/logos/google_play/google_play-icon.svg',
+                link: 'https://play.google.com/store/apps/developer?id=thixpin&hl=en'
+            },
+            {
                 title: 'Anywhere on the internet',
                 logo: 'https://www.graphicsprings.com/filestorage/stencils/46f2b6c8e3e465373fe21ed7c2db566b.png?width=200&height=200',
                 link: '@thixpin'
@@ -542,25 +548,27 @@ export const contactInfos = [
         text: "Apps I rarely use",
         arr: [
             {
-                title: 'LinkedIn',
-                logo: 'https://image.flaticon.com/icons/svg/174/174857.svg',
-                link: 'https://www.linkedin.com/in/thixpin/'
+                title: 'Facebook',
+                logo: 'https://image.flaticon.com/icons/svg/124/124010.svg',
+                link: 'https://fb.com/thixpin'
             },
             {
-                title: 'Reddit',
-                logo: 'https://image.flaticon.com/icons/svg/174/174866.svg',
-                link: 'https://www.reddit.com/user/thixpin'
+                title: 'Skype',
+                logo: 'https://image.flaticon.com/icons/svg/174/174869.svg',
+                link: 'thixpin'
             },
-            {
-                title: 'Twitter',
-                logo: 'https://image.flaticon.com/icons/svg/733/733579.svg',
-                link: 'https://twitter.com/thixpin'
-            },
-            {
-                title: 'Instagram',
-                logo: 'https://image.flaticon.com/icons/svg/2111/2111463.svg',
-                link: 'https://www.instagram.com/thixpin/'
-            },
+            
+            // {
+            //     title: 'Reddit',
+            //     logo: 'https://image.flaticon.com/icons/svg/174/174866.svg',
+            //     link: 'https://www.reddit.com/user/thixpin'
+            // },
+            
+            // {
+            //     title: 'Instagram',
+            //     logo: 'https://image.flaticon.com/icons/svg/2111/2111463.svg',
+            //     link: 'https://www.instagram.com/thixpin/'
+            // },
         ]
     },
     {

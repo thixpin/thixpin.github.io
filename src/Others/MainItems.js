@@ -51,7 +51,7 @@ export const navContactIcons = [
     },
     {
         svgPath: facebookIcon,
-        link: 'https://facebook.com/thixpin'
+        link: 'https://fb.com/thixpin'
     },
     {
         svgPath: wordpressIcon,
