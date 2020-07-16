@@ -371,7 +371,7 @@ export const skills = [
             },
             {
                 title: 'Deployd',
-                logo: 'http://deployd.com/img/bucket/modular.png'
+                logo: 'https://deployd.com/img/bucket/modular.png'
             },
             {
                 title: 'npm',
@@ -411,13 +411,13 @@ export const projects = [
             },
             {
                 title: 'NCDD MIS',
-                logo: 'http://3.bp.blogspot.com/-1Mz4qza0D6Y/U38UVF_NSmI/AAAAAAAAOg0/765hNBFiv-A/s1600/logo_only1.jpg',
+                logo: 'https://3.bp.blogspot.com/-1Mz4qza0D6Y/U38UVF_NSmI/AAAAAAAAOg0/765hNBFiv-A/s1600/logo_only1.jpg',
                 desc: 'MIS System for National CDD Project of Myanmar',
                 link: 'https://ncddmis.com/'
             },
             {
                 title: 'CDA Myanmar',
-                logo: 'http://cdamyanmar.org/en/assets/components/thixpin/images/cda_logo.png',
+                logo: 'https://cdamyanmar.org/en/assets/components/thixpin/images/cda_logo.png',
                 desc: 'CMS Website for NGO',
                 link: 'http://cdamyanmar.org/en/'
             },
@@ -435,7 +435,7 @@ export const projects = [
             },
             {
                 title: 'Myanmar Eye Centre',
-                logo: 'http://demo.myanmareyecentre.com/storage/app/uploads/public/5ee/e75/3b0/5eee753b0a778446368130.png',
+                logo: 'https://www.myanmareyecentre.com/themes/mec_october/assets/img/logo.png',
                 desc: 'Clinic website with E-commerce, Eyetesting App and Appointment Services (Still in developemnt)  ',
                 link: 'http://demo.myanmareyecentre.com/en'
             },
@@ -447,13 +447,13 @@ export const projects = [
         arr: [
             {
                 title: 'CDD MIS',
-                logo: 'http://3.bp.blogspot.com/-1Mz4qza0D6Y/U38UVF_NSmI/AAAAAAAAOg0/765hNBFiv-A/s1600/logo_only1.jpg',
+                logo: 'https://3.bp.blogspot.com/-1Mz4qza0D6Y/U38UVF_NSmI/AAAAAAAAOg0/765hNBFiv-A/s1600/logo_only1.jpg',
                 desc: 'Data collection app for CDD MIS System',
                 link: 'https://play.google.com/store/apps/details?id=com.ncddmis.y7'
             },
             {
                 title: 'RWS MIS',
-                logo: 'http://localhost/001/images/drd_logo.png',
+                logo: 'https://www.rwsmis.com/app/images/drd_logo.png',
                 desc: 'Data collection app for RWS MIS System',
                 link: 'https://www.rwsmis.com/app/'
             },
