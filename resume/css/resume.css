@@ -1,0 +1,215 @@
+@charset "UTF-8";
+/* CSS Document */
+*{
+	font-family	: 'Raleway',FontAwesome, sans-serif;
+	}
+.clearfix{
+	clear		: both;
+	float		: none !important;
+	}
+.header{
+	background	: #f9f9f9;
+	padding		: 50px 0px;
+	border-bottom: solid 1px #cdcdcd;
+	}
+.leftcontent-wrapper{
+	position	:relative;
+	width		: 25%;
+	float		: left;
+	}
+.leftcontent-wrapper img{
+	margin		: 10px 0;
+	width		: 180px;
+	}
+.rightcontent-wrapper{
+	position	: relative;
+	width		: 75%;
+	float		: left;
+	}
+.rightcontent-wrapper .hello{
+	color		: #666666;
+	font-size	: 55px;
+	line-height	: 60px;
+	font-weight	: 300;
+	text-transform:uppercase;
+	}
+.rightcontent-wrapper .hello small{
+	font-size	: 25px;
+	}
+.rightcontent-wrapper .name{
+	font-weight	: 900;
+	font-size	: 55px;
+	line-height	: 60px;
+	}
+.rightcontent-wrapper h2{
+	font-size	: 25px;
+	font-weight	: 300;
+	text-transform:uppercase;
+	}
+.experience-bubble{
+	width		: 160px;
+	position	: absolute;
+	right		: 165px;
+	top			: -25px;
+	}
+.contact-wrapper{
+	display		: block;
+	}
+.contact-wrapper .content{
+	width		: 33%;
+	float		: left;
+	}
+.contact-wrapper .content .fa{
+	margin-right: 10px;
+	}
+.contact-wrapper .content .fa-mobile,
+.contact-wrapper .content .fa-envelope{
+	color		: #717171 !important;
+	}
+.contact-wrapper .content .fa-mobile,
+.contact-wrapper .content .fa-laptop{
+	font-size	: 20px;
+	
+	}
+.contact-wrapper .content a{
+	color		: #000000
+	}
+.contact-wrapper .content .fa-laptop{
+	color		: #3eadb1;
+	}
+.content-title{
+	color		: #3eadb1;
+	font-weight	: bold;
+	font-size	: 22px;
+	line-height	: 28px;
+	text-transform:uppercase;
+	}
+.content-title small{
+	line-height	: 28px;
+	}
+.content-section{
+	margin		: 30px 0 60px 0;
+	}
+.singapore-experiences h4,
+.myanmar-experiences h4{
+	padding		: 15px 0px;
+	border-bottom: solid 1px #e0e0e0;	
+	}
+.singapore-experiences,
+.myanmar-experiences{
+	
+	margin		: 0 0 20px 0px;
+	}
+.two-columns-list{
+	padding		: 0;
+	margin		: 0;
+	}
+.two-columns-list li{
+	list-style	: none;
+	padding		: 5px 0px;
+	}
+.two-columns-list li .years{
+	width		: 20%;
+	}
+.two-columns-list li .years,
+.two-columns-list li .company-name{
+	float		: left;
+	}
+.skill-metrics{
+	padding		: 0;
+	margin		: 40px 0 0 0;
+	}
+.skill-metrics li{
+	list-style	: none;
+	}
+.skill-metrics li label{
+	}
+.skill-metrics li .progress{
+	height		: 10px;
+	}
+.skill-metrics li .background-gray{
+	}
+.skill-metrics li .current-value{
+	}
+.skill-metrics .progress-info .bar{
+	background		: #369497 !important;
+	}
+	
+.language-list li .language{
+	width		: 30%;
+	float		: left;
+	}
+.personal-info-list li{
+	display		: inlne-block;
+	}
+.personal-info-list li div{
+	margin		: 2px 0px;
+	padding		: 0px 0px;
+	float		: left;
+	width		: 25%;
+	}
+	
+.education .fa{
+	margin-right: 10px;
+	}
+.resume-arrow{
+	position	: absolute;
+	width		: 40px;
+	left		: 50px;
+	}
+.contact-circle{
+	position	: absolute;
+	top			: 70px;
+	left		: 110px;
+	width		: 400px;
+	}
+.salary-contact-wrapper{
+	position	: absolute;
+	top			: 84px;
+	left		: 140px;
+	}
+.salary-contact-wrapper > .email,
+.salary-contact-wrapper > .phone{
+	margin-right: 65px;
+	float		: left;
+	}
+.experience-list{
+	padding		: 0;
+	margin		: 0;
+	}
+.experience-list li{
+	display		: inline-block;
+	margin		: 20px 20px 0 0;	
+	}
+.experience-list li a{
+	display		: block;
+	text-align	: center;
+	font-size	: 12px;
+	color		: #000;
+	font-weight	: 700;
+	}
+.experience-list li .img-wrapper,
+.experience-list li a img{
+	-webkit-transition: all 400ms ease;
+	-moz-transition: all 400ms ease;
+	-ms-transition: all 400ms ease;
+	-o-transition: all 400ms ease;
+	transition: all 400ms ease;
+	}
+.experience-list li .img-wrapper{
+	overflow	: hidden;
+	display		: block;
+	width		: 155px;
+	height		: 88px;
+	border-radius: 5px;
+	box-shadow	: 0px 3px 0px #ccc;
+	background	: #3eadb1;
+	margin-bottom :20px;
+	}
+.experience-list li a:hover img{
+	-moz-transform: scale(1.4) rotate(10deg);
+	-webkit-transform: scale(1.4) rotate(10deg);
+	-o-transform: scale(1.4) rotate(10deg);
+	-ms-transform: scale(1.4) rotate(10deg);
+	transform: scale(1.4) rotate(10deg);
+	}
