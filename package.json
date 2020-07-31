@@ -2,7 +2,7 @@
   "name": "my-portfolio-v2",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://thixpin.github.io/",
+  "homepage": "https://www.thixpin.me/",
   "dependencies": {
     "@material-ui/core": "^4.9.10",
     "@testing-library/jest-dom": "^4.2.4",
