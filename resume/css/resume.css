@@ -45,6 +45,7 @@
 	font-size	: 25px;
 	font-weight	: 300;
 	text-transform:uppercase;
+	padding-left: 1.7em;
 	}
 .experience-bubble{
 	width		: 160px;
@@ -90,13 +91,13 @@
 .content-section{
 	margin		: 30px 0 60px 0;
 	}
-.singapore-experiences h4,
-.myanmar-experiences h4{
+.database-experiences h4,
+.it-experiences h4{
 	padding		: 15px 0px;
 	border-bottom: solid 1px #e0e0e0;	
 	}
-.singapore-experiences,
-.myanmar-experiences{
+.database-experiences,
+.it-experiences{
 	
 	margin		: 0 0 20px 0px;
 	}
@@ -213,3 +214,12 @@
 	-ms-transform: scale(1.4) rotate(10deg);
 	transform: scale(1.4) rotate(10deg);
 	}
+
+/* @media print {
+	body {transform: scale(.75);}
+	table {page-break-inside: avoid;}
+} */
+
+.page-break{
+	page-break-before: always;
+}
