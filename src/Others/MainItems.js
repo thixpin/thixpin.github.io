@@ -32,7 +32,7 @@ export const giftIcon = 'https://image.flaticon.com/icons/svg/1867/1867817.svg'
 
 // First page infos
 export var myName = 'Soe Thura'
-export var myOccupation = 'Web Developer at leetdev.net'
+export var myOccupation = 'COO / Web Developer at leetdev.net'
 export var myDetails = 'Hello, I am Soe Thura. I love Programming, making application/software for Mobile and Web. I started programming as a hobby since 2011. Wrote my first few scripts in Batch and VBScript. Later I learned PHP, Python, JavaScript etc, Worked in so many libraries & frameworks like AngularJS(one of my favorites), Angular2+, NodeJS, worked using so many technologies like Git, Arduino, etc. It does feel amazing to see myself improving. Hope to improve everything around me one day...'
 export var myImageLink = ""
 export var primaryColor = '#1e673b';
