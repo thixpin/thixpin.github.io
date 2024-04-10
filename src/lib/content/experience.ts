@@ -64,7 +64,7 @@ export const experienceSection: ExperienceSectionType = {
         'Designing and implementing the database schema.',
         'Automating the database backup and restore process.',
         'Monitoring and troubleshooting database performance issues.',
-        'Colloborating between the development and operation teams.',
+        'Collaborating between the development and operation teams.',
         'Actively sharing knowledge with the team members to foster a learning culture.',
         ],
     },

@@ -72,7 +72,7 @@ const About = () => {
           {list && (
             <>
               <p>{list.title}</p>
-              <ul className="grid w-2/3 grid-cols-2 gap-1 text-sm">
+              <ul className="grid w-3/3 grid-cols-3 gap-1 text-sm">
                 {list.items.map((item) => (
                   <ListItem key={getId()}>{item}</ListItem>
                 ))}
