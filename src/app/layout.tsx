@@ -1,6 +1,7 @@
 import { seoData } from '@/lib/content/portfolio';
 import ThemeProvider from '@/lib/hooks/use-theme';
 import fontVariables from '@/lib/utils/fonts';
+import { gaTrackingId } from '@/lib/utils/config'
 
 import Cursor from '@/components/ui/Cursor';
 
@@ -76,6 +77,18 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <head>
+
+        <script async src={`https://www.googletagmanager.com/gtag/js?id=${gaTrackingId}`} />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', '${gaTrackingId}');
+            `,
+          }} />
+        
         <script src="/scripts/no-flash.js" async />
       </head>
       <body className={`text-text bg-bg ${fontVariables}`}>
