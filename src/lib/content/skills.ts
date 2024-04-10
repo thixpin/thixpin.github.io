@@ -9,7 +9,7 @@ export const skillsSection: SkillsSectionType = {
         title: 'Site Reliability Engineering',
         // animation lottie file: https://lottiefiles.com/
         lottie: {
-        light: '/lotties/devops.json',
+        light: '/lotties/cloudinfra.json',
         dark: '/lotties/cloudinfra.json',
         },
         points: [
