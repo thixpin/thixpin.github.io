@@ -41,6 +41,17 @@ const About = () => {
             .
           </p>
           <p>
+            I've also provided training for DevOps and SRE practices at {' '}
+            <Link
+              href="https://www.devktops.com/"
+              target="_blank"
+              className="text-accent"
+            >
+              Dev KT Ops
+            </Link>
+            , where I've delivered DevOps and AWS Certification training to aspiring engineers.
+          </p>
+          <p>
             As the co-founder of {' '}
             <Link
               href="https://www.mmunicode.org/"

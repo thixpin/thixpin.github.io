@@ -4,6 +4,21 @@ export const experienceSection: ExperienceSectionType = {
     title: "where i've worked",
     experiences: [
     {
+        company: 'DevKTOps',
+        companyUrl: 'https://www.devktops.com/',
+        role: 'Instructor',
+        started: 'February 2024',
+        upto: 'present',
+        tasks: [
+            'Delivering DevOps and SRE training to aspiring engineers.',
+            'Creating and updating course materials.',
+            'Providing guidance and mentorship to attendees.',
+            'Helping students with their projects and assignments.',
+            'Conducting assessments and providing feedback.',
+            'AWS certification training.',
+        ],
+    },
+    {
         company: 'Onenex',
         companyUrl: 'https://www.onenex.co/',
         role: 'SRE Team Lead',
@@ -83,7 +98,7 @@ export const experienceSection: ExperienceSectionType = {
         ],
     },
     {
-        company: 'CommunityDevelopmentAssociation',
+        company: 'CDA Myanmar',
         companyUrl: 'https://www.cda-myanmar.com/',
         role: 'Database and M&E Officer',
         started: 'May 2011',
