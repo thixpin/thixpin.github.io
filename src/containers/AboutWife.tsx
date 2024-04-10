@@ -20,7 +20,7 @@ const AboutWife = () => {
         'Instructing me to cook',
         'Shopping',
         'Online shopping',
-        'Goging to spa',
+        'Going to the spa',
         'Talking with her friends',
         'Traveling',
         'Taking her photos',
