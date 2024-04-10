@@ -26,7 +26,7 @@ const About = () => {
           <p>
             Hi, my name is Soe Thura, a Site Reliability Engineer, Cloud Solution Architect 
             as well as AWS Community Builder, DevOps Engineer, and Backend Developer who wants 
-            to want to explore new technologies and solve real-world problems.
+            to explore new technologies and solve real-world problems.
           </p>
           <p>
             Fast-forward to today, and I’ve had the privilege of working at a
