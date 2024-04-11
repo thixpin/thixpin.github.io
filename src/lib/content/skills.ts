@@ -75,7 +75,6 @@ export const skillsSection: SkillsSectionType = {
         { name: 'docker', icon: 'logos:docker-icon' },
         { name: 'ansible', icon: 'logos:ansible' },
         { name: 'linux', icon: 'logos:linux-tux' },
-        { name: 'bash', icon: 'logos:bash' },
         { name: 'terraform', icon: 'logos:terraform-icon' },
         { name: 'circleci', icon: 'logos:circleci' },
         { name: 'git', icon: 'logos:git-icon' },

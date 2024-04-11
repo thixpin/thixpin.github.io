@@ -35,6 +35,21 @@ export interface AboutSectionType extends Section {
   img: string;
 }
 
+type CertificateType = {
+  title: string;
+  issuer: string;
+  description: string;
+  issue_date: string;
+  expiry_date: string;
+  logo_path: string;
+  certificate_link: string;
+};
+
+export interface CertificationsSectionType extends Section {
+  title: string;
+  certificates: CertificateType[];
+}
+
 type SkillType = {
   id: string;
   title: string;
