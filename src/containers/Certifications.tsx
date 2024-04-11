@@ -18,7 +18,7 @@ const Certifications = () => {
   }, []);
 
   return domLoaded ? (
-    <Wrapper id="certification" {...getSectionAnimation}>
+    <Wrapper id="certifications" {...getSectionAnimation}>
       <h2 className="heading-secondary">{title}</h2>
       <main className="flex flex-col items-center gap-16 lg:items-start lg:flex-row">
 
