@@ -6,7 +6,7 @@ export const certificationsSection: CertificationsSectionType = {
         {
             title: 'B.Sc Industrial Chemistry',
             issuer: 'West Yangon University',
-            description: 'The Bachelor of Science in Computer Science program is designed to provide students with a strong foundation in computer science, as well as a broad',
+            description: 'I have completed my Bachelor of Science in Industrial Chemistry from West Yangon University.',
             issue_date: 'November 2006',
             expiry_date: '',
             logo_path: '/images/graduation.svg',
