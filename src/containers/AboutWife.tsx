@@ -39,16 +39,16 @@ const AboutWife = () => {
       <main className="flex flex-col items-center gap-16 lg:items-start lg:flex-row">
         <div className="space-y-4 lg:w-3/5">
           <p>
-            The love of my life, my wife, Thiri Zay Ya is a very kind-hearted and caring person.
-            She is a very talented and hard-working individual who is always willing to help others.
+          The love of my life, my wife, Thiri Zay Ya, is a very kind-hearted and caring person. 
+          She is also a very talented and hard-working individual who is always willing to help others.
           </p>
           <p>
             Her hobbies are buying cloches, caring her skin, and watching k-dramas and eating hotpot & BBQ.
-            She always said that me is a ver good in cooking for her and me have a good talent in housekeeping.
+            She always said that I am very good at cooking for her, and I have a good talent in housekeeping.
           </p>
           <p>
-            She is very like to eat ice-cream and she her favorite ice-cream is chocolate flavor.
-            She also like to eat the delicious foods that cooked by me and her mom.
+          She really likes to eat ice cream, and her favorite flavor is chocolate. 
+          She also enjoys eating delicious foods cooked by both me and her mom.
           </p>
 
           {list && (
