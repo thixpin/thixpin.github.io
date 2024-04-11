@@ -43,7 +43,7 @@ const AboutWife = () => {
           She is also a very talented and hard-working individual who is always willing to help others.
           </p>
           <p>
-            Her hobbies are buying cloches, caring her skin, and watching k-dramas and eating hotpot & BBQ.
+            Her hobbies are buying clothes, caring her skin, and watching k-dramas and eating hotpot & BBQ.
             She always said that I am very good at cooking for her, and I have a good talent in housekeeping.
           </p>
           <p>
