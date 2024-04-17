@@ -1,9 +1,9 @@
 /** @type {import('next').NextConfig} */
 module.exports = {
-  // output: 'export',
+  output: 'export',
   reactStrictMode: true,
   images: {
-    // unoptimized: true,
+    unoptimized: true,
     remotePatterns: [
       {
         protocol: 'https',
