@@ -1,6 +1,6 @@
 import {
   About,
-  AboutWife,
+  // AboutWife,
   Certifications,
   Contact,
   Experience,
