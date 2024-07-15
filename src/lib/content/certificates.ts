@@ -48,5 +48,14 @@ export const certificationsSection: CertificationsSectionType = {
             logo_path: '/images/efset.png',
             certificate_link: 'https://cert.efset.org/8N8kWc',
         },
+        {
+            title: 'Linux Foundation Certified System Administrator',
+            issuer: 'Linux Foundation',
+            description: 'The Linux Foundation Certified System Administrator (LFCS) certification is ideal for candidates early in their Linux system administration or open source career. The exam consists of performance-based items that simulate on-the-job tasks and scenarios faced by sysadmins in the real world.',
+            issue_date: 'July 2024',
+            expiry_date: 'July 2026',
+            logo_path: '/images/lfcs.png',
+            certificate_link: 'https://www.credly.com/badges/4b6c1770-e83d-4cb4-86c6-5717c003eaa3',
+        }
     ],
 };
