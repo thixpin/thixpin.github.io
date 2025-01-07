@@ -9,7 +9,6 @@ const Hello = () => {
       <ShowLottie path="/lotties/hello.json" className="mx-auto" />
     </div>
   );
-  };
-  
+};
+
 export default Hello;
-  

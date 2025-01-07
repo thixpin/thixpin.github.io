@@ -5,7 +5,7 @@ import fontVariables from '@/lib/utils/fonts';
 import Cursor from '@/components/ui/Cursor';
 
 import '../styles/globals.css';
-import { Analytics } from "@vercel/analytics/react";
+import { Analytics } from '@vercel/analytics/react';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -80,7 +80,7 @@ export default function RootLayout({
         <script src="/scripts/no-flash.js" async />
       </head>
       <body className={`text-text bg-bg ${fontVariables}`}>
-        <Analytics/>
+        <Analytics />
         <Cursor className="hidden dark:lg:block" />
         <ThemeProvider>{children}</ThemeProvider>
       </body>

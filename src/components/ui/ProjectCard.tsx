@@ -49,8 +49,12 @@ const ProjectCard = ({
             <p className="font-mono text-xs capitalize">{tags.join(' | ')}</p>
             <div className="flex items-center space-x-1.5">
               <a
-                href={repo} 
-                className={repo && repo != '' ? 'block duration-200 hover:text-accent' : 'block duration-200 hover:text-accent invisible'}
+                href={repo}
+                className={
+                  repo && repo != ''
+                    ? 'block duration-200 hover:text-accent'
+                    : 'block duration-200 hover:text-accent invisible'
+                }
                 target="_blank"
               >
                 <Icon icon="tabler:brand-github" width={20} height={20} />

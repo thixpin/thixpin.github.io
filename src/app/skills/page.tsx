@@ -1,8 +1,4 @@
-import {
-  Layout,
-  Skills,
-  Contact,
-} from '@/containers';
+import { Contact, Layout, Skills } from '@/containers';
 
 import type { NextPage } from 'next';
 

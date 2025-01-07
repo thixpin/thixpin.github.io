@@ -24,8 +24,7 @@ export const seoData = {
   description:
     'Soe Thura is a Site Reliability Engineer, Cloud Solution Architect, AWS Community Builder, DevOps Engineer, and 2x AWS Certified.',
   author: author.name,
-  image:
-    '/images/preview.png',
+  image: '/images/preview.png',
   url: 'https://www.thixpin.me/',
   keywords: [
     'GitHub',

@@ -1,7 +1,7 @@
 'use client';
 import { certificationsSection } from '@/lib/content/certificates';
 
-import { Certificate,ShowLottie, Wrapper } from '@/components';
+import { Certificate, ShowLottie, Wrapper } from '@/components';
 
 import { getSectionAnimation } from '@/styles/animations';
 
@@ -12,7 +12,6 @@ const Certifications = () => {
   // To avoid hydration error
   const [domLoaded, setDomLoaded] = useState(false);
 
-
   useEffect(() => {
     setDomLoaded(true);
   }, []);
@@ -21,9 +20,11 @@ const Certifications = () => {
     <Wrapper id="certifications" {...getSectionAnimation}>
       <h2 className="heading-secondary">{title}</h2>
       <main className="flex flex-col items-center gap-16 lg:items-start lg:flex-row">
-
         <div className="relative w-64 h-64 group lg:w-1/3 sm:w-auto sm:h-auto">
-          <ShowLottie path='/lotties/education.json' className="md:min-h-[448px] md:min-w-[448px]" />
+          <ShowLottie
+            path="/lotties/education.json"
+            className="md:min-h-[448px] md:min-w-[448px]"
+          />
         </div>
 
         <div className="space-y-4 lg:w-3/5">
@@ -39,10 +40,9 @@ const Certifications = () => {
                 logo_path={certificate.logo_path}
                 certificate_link={certificate.certificate_link}
               />
-            ))}                
+            ))}
           </ol>
         </div>
-        
       </main>
     </Wrapper>
   ) : (

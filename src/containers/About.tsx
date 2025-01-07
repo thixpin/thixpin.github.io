@@ -24,9 +24,10 @@ const About = () => {
       <main className="flex flex-col items-center gap-16 lg:items-start lg:flex-row">
         <div className="space-y-4 lg:w-3/5">
           <p>
-            Hi, my name is Soe Thura, a Site Reliability Engineer, Cloud Solution Architect 
-            as well as AWS Community Builder, DevOps Engineer, and Backend Developer who wants 
-            to explore new technologies and solve real-world problems.
+            Hi, my name is Soe Thura, a Site Reliability Engineer, Cloud
+            Solution Architect as well as AWS Community Builder, DevOps
+            Engineer, and Backend Developer who wants to explore new
+            technologies and solve real-world problems.
           </p>
           <p>
             Fast-forward to today, and I’ve had the privilege of working at a
@@ -41,7 +42,7 @@ const About = () => {
             .
           </p>
           <p>
-            I've also provided training for DevOps and SRE practices at {' '}
+            I've also provided training for DevOps and SRE practices at{' '}
             <Link
               href="https://www.devktops.com/"
               target="_blank"
@@ -49,35 +50,39 @@ const About = () => {
             >
               Dev KT Ops
             </Link>
-            , where I've delivered DevOps and AWS Certification training to aspiring engineers.
+            , where I've delivered DevOps and AWS Certification training to
+            aspiring engineers.
           </p>
           <p>
-            As the co-founder of {' '}
+            As the co-founder of{' '}
             <Link
               href="https://www.mmunicode.org/"
               target="_blank"
               className="text-accent"
             >
               Myanmar Unicode Area
-            </Link> {' '}
-            I've played a pivotal role in driving Myanmar Unicode Migration initiatives, 
-            aligning with my passion for fostering technological advancements.
+            </Link>{' '}
+            I've played a pivotal role in driving Myanmar Unicode Migration
+            initiatives, aligning with my passion for fostering technological
+            advancements.
           </p>
           <p>
-            In addition to my professional roles, I actively contribute thought 
-            leadership through articles on DevOps and AWS-related topics at {' '}
+            In addition to my professional roles, I actively contribute thought
+            leadership through articles on DevOps and AWS-related topics at{' '}
             <Link
               href="https://www.kalaung.org/"
               target="_blank"
               className="text-accent"
             >
               Kalaung Tech
-            </Link>. 
-            This initiative not only highlights my expertise but also contributes 
-            to creating a culture of continuous learning within the tech community.
+            </Link>
+            . This initiative not only highlights my expertise but also
+            contributes to creating a culture of continuous learning within the
+            tech community.
           </p>
           <p>
-            My main focus these days is learning new technologies and architecting to growth my career.
+            My main focus these days is learning new technologies and
+            architecting to growth my career.
           </p>
 
           {list && (
