@@ -25,9 +25,8 @@ const About = () => {
         <div className="space-y-4 lg:w-3/5">
           <p>
             Hi, my name is Soe Thura, a Site Reliability Engineer, Cloud
-            Solution Architect as well as AWS Community Builder, DevOps
-            Engineer, and Backend Developer who wants to explore new
-            technologies and solve real-world problems.
+            Solution Architect, DevOps Engineer, and Backend Developer who 
+            wants to explore new technologies and solve real-world problems.
           </p>
           <p>
             Fast-forward to today, and I’ve had the privilege of working at a
