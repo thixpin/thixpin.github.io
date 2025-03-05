@@ -22,7 +22,7 @@ export const author = {
 export const seoData = {
   title: 'Soe Thura | Site Reliability Engineer',
   description:
-    'Soe Thura is a Site Reliability Engineer, Cloud Solution Architect, AWS Community Builder, DevOps Engineer, and 2x AWS Certified.',
+    'Soe Thura | Site Reliability Engineer | Cloud Solution Architect | AWS Community Builder | DevOps Engineer | GCP, LFCS & 3x AWS Certified.',
   author: author.name,
   image: '/images/preview.png',
   url: 'https://www.thixpin.me/',
