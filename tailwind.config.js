@@ -4,14 +4,16 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        bg: '#09090B',
-        surface: '#121215',
-        line: '#27272A',
-        ink: '#FAFAFA',
-        muted: '#A1A1AA',
+        // Values live as CSS custom properties in src/input.css (dark +
+        // light themes); RGB triplets keep Tailwind alpha modifiers working.
+        bg: 'rgb(var(--c-bg) / <alpha-value>)',
+        surface: 'rgb(var(--c-surface) / <alpha-value>)',
+        line: 'rgb(var(--c-line) / <alpha-value>)',
+        ink: 'rgb(var(--c-ink) / <alpha-value>)',
+        muted: 'rgb(var(--c-muted) / <alpha-value>)',
         accent: {
-          DEFAULT: '#EF4444',
-          strong: '#DC2626',
+          DEFAULT: 'rgb(var(--c-accent) / <alpha-value>)',
+          strong: 'rgb(var(--c-accent-strong) / <alpha-value>)',
         },
       },
       fontFamily: {
@@ -19,7 +21,7 @@ module.exports = {
         mono: ['"JetBrains Mono"', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'monospace'],
       },
       boxShadow: {
-        glow: '0 0 20px rgba(239, 68, 68, 0.15)',
+        glow: '0 0 20px rgb(var(--c-accent) / 0.15)',
       },
       maxWidth: {
         site: '72rem',

@@ -3,10 +3,46 @@
 @tailwind utilities;
 
 @layer base {
+  /* Theme tokens (constitution III): dark is the brand default; light is
+     chosen by system preference or the header toggle (data-theme). */
+  :root {
+    --c-bg: 250 250 250;
+    --c-surface: 255 255 255;
+    --c-line: 228 228 231;
+    --c-ink: 24 24 27;
+    --c-muted: 82 82 91;
+    --c-accent: 185 28 28;
+    --c-accent-strong: 153 27 27;
+    color-scheme: light;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme='light']) {
+      --c-bg: 9 9 11;
+      --c-surface: 18 18 21;
+      --c-line: 39 39 42;
+      --c-ink: 250 250 250;
+      --c-muted: 161 161 170;
+      --c-accent: 239 68 68;
+      --c-accent-strong: 220 38 38;
+      color-scheme: dark;
+    }
+  }
+
+  :root[data-theme='dark'] {
+    --c-bg: 9 9 11;
+    --c-surface: 18 18 21;
+    --c-line: 39 39 42;
+    --c-ink: 250 250 250;
+    --c-muted: 161 161 170;
+    --c-accent: 239 68 68;
+    --c-accent-strong: 220 38 38;
+    color-scheme: dark;
+  }
+
   html {
     scroll-behavior: smooth;
     scroll-padding-top: 5rem;
-    color-scheme: dark;
   }
 
   body {
@@ -76,17 +112,39 @@
   }
 
   .field {
-    @apply mt-2 w-full rounded-lg border border-line bg-bg px-4 py-3 text-sm text-ink placeholder:text-zinc-600 transition focus:border-accent/60 focus:outline-none focus:ring-2 focus:ring-accent/30;
+    @apply mt-2 w-full rounded-lg border border-line bg-bg px-4 py-3 text-sm text-ink placeholder:text-muted/60 transition focus:border-accent/60 focus:outline-none focus:ring-2 focus:ring-accent/30;
   }
 }
 
 @layer utilities {
   .bg-grid {
     background-image:
-      linear-gradient(to right, rgba(39, 39, 42, 0.45) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(39, 39, 42, 0.45) 1px, transparent 1px);
+      linear-gradient(to right, rgb(var(--c-line) / 0.45) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(var(--c-line) / 0.45) 1px, transparent 1px);
     background-size: 48px 48px;
     mask-image: radial-gradient(ellipse at top, #000 30%, transparent 75%);
+  }
+
+  /* Theme-toggle icons: show the icon for the theme a click switches to. */
+  .icon-sun {
+    display: none;
+  }
+  .icon-moon {
+    display: inline-flex;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme='light']) .icon-sun {
+      display: inline-flex;
+    }
+    :root:not([data-theme='light']) .icon-moon {
+      display: none;
+    }
+  }
+  :root[data-theme='dark'] .icon-sun {
+    display: inline-flex;
+  }
+  :root[data-theme='dark'] .icon-moon {
+    display: none;
   }
 }
 
