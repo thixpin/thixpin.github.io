@@ -37,6 +37,17 @@ jobs:
           cp index.html .nojekyll _site/
           cp -R assets _site/assets
 
+      - name: Inject Web3Forms access key
+        env:
+          WEB3FORMS_ACCESS_KEY: ${{ secrets.WEB3FORMS_ACCESS_KEY }}
+        run: |
+          if [ -z "$WEB3FORMS_ACCESS_KEY" ]; then
+            echo "::warning::WEB3FORMS_ACCESS_KEY secret is not set — the deployed contact form will fall back to mailto."
+          else
+            sed -i "s/name=\"access_key\" value=\"\"/name=\"access_key\" value=\"$WEB3FORMS_ACCESS_KEY\"/" _site/index.html
+            grep -q "name=\"access_key\" value=\"$WEB3FORMS_ACCESS_KEY\"" _site/index.html
+          fi
+
       - uses: actions/configure-pages@v6
 
       - uses: actions/upload-pages-artifact@v5

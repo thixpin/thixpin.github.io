@@ -88,7 +88,7 @@
 **Independent Test**: With JS off, submitting the form POSTs natively to the service; with JS on, invalid input is reported via `aria-live`, success resets the form, POST failure composes a mailto.
 
 - [x] T018 [US3] Contact section markup in `index.html`: direct links (email/GitHub/LinkedIn with accessible names) + semantic form (labels, required name/email/message, email format, `aria-live` status region) (was T012)
-- [ ] T019 [US3] (user-executed) Get a Web3Forms access key (web3forms.com, free plan) and paste it into the hidden `access_key` input in `index.html` — no fabricated key ships (was T030)
+- [ ] T019 [US3] (user-executed) Get a Web3Forms access key (web3forms.com, free plan) and store it as the `WEB3FORMS_ACCESS_KEY` GitHub Actions secret; `deploy.yml` injects it into the staged `index.html` at build time — the key is never committed (was T030)
 - [X] T020 [US3] Contact form rework in `index.html` per `contracts/form-service.md`: `method="POST" action="https://api.web3forms.com/submit"` + hidden `access_key`/`subject`/`from_name` + `botcheck` honeypot so native submit works with JS disabled (FR-010); inline JS validates (`aria-invalid` + focus first invalid), sends JSON with `Accept: application/json` and sending state, mailto composition fallback on non-2xx/network failure — live sends gated on T019 (was T018)
 
 **Checkpoint**: US3 passes on both paths.

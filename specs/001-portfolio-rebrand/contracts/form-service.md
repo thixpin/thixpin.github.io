@@ -3,8 +3,10 @@
 Contact form submission (FR-010, US3). Provider decided 2026-10-02:
 **Web3Forms free plan**. The form's `action` is the fixed endpoint
 `https://api.web3forms.com/submit`; the site is identified by the hidden
-`access_key` input, which the owner pastes in (task T019) — never a
-fabricated value.
+`access_key` input. The checked-in value is empty: the owner stores the key
+as the `WEB3FORMS_ACCESS_KEY` Actions secret (task T019) and `deploy.yml`
+injects it into the staged `index.html` at build time — the key never
+enters Git, and a fabricated value never ships.
 
 ## Form fields
 

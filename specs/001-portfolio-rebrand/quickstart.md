@@ -88,13 +88,14 @@ in repo settings instead:
 ## Contact form backend (required — task T019 → T020)
 
 Per spec FR-010: the form POSTs to Web3Forms (free plan). Get an access key
-at <https://web3forms.com> for thixpin@gmail.com and paste it into the
-hidden `access_key` input of `<form id="contact-form">` in `index.html`.
-Native POST works with JavaScript disabled; JS adds validation and sending
-states and composes a `mailto:` only as fallback when the POST fails.
-Never commit a fabricated access key — until the real key is pasted, JS
-submissions fall back to mailto and no-JS submissions show a Web3Forms
-error page.
+at <https://web3forms.com> for thixpin@gmail.com and store it as the
+repository Actions secret **`WEB3FORMS_ACCESS_KEY`** (Settings → Secrets
+and variables → Actions). The deploy workflow injects it into the staged
+`index.html` at build time; the key is never committed to Git, and the
+checked-in `access_key` value stays empty. Native POST works with
+JavaScript disabled on the deployed site; JS adds validation and sending
+states and composes a `mailto:` only as fallback when the POST fails —
+which is also the local-dev behavior, since the key only exists in CI.
 
 ## Updating content
 
