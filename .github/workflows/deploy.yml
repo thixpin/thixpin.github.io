@@ -41,7 +41,9 @@ jobs:
 
       - name: Inject Web3Forms access key
         env:
-          WEB3FORMS_ACCESS_KEY: ${{ secrets.WEB3FORMS_ACCESS_KEY }}
+          # The key is public by nature (visible in the deployed form), so an
+          # Actions *variable* is fine; a secret of the same name wins if set.
+          WEB3FORMS_ACCESS_KEY: ${{ secrets.WEB3FORMS_ACCESS_KEY || vars.WEB3FORMS_ACCESS_KEY }}
         run: |
           if [ -z "$WEB3FORMS_ACCESS_KEY" ]; then
             echo "::warning::WEB3FORMS_ACCESS_KEY secret is not set — the deployed contact form will fall back to mailto."
