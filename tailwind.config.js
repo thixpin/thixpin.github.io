@@ -15,6 +15,7 @@ module.exports = {
           DEFAULT: 'rgb(var(--c-accent) / <alpha-value>)',
           strong: 'rgb(var(--c-accent-strong) / <alpha-value>)',
         },
+        'on-accent': 'rgb(var(--c-on-accent) / <alpha-value>)',
       },
       fontFamily: {
         sans: ['"Plus Jakarta Sans"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
