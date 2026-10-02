@@ -48,7 +48,7 @@ for long copy).
 · hireable: true.
 
 **Positioning (clarified 2026-10-02, FR-008)**: Software Engineer & DevOps
-Engineer (bio-derived; supersedes the brief's "Cloud Solution Architect &
+(literal bio string; supersedes the brief's "Cloud Solution Architect &
 Senior DevOps Engineer"). Hero: availability ping → name → title → paragraph bridging cloud
 platforms (AWS/GCP, IaC, CI/CD, Kubernetes, observability) and agentic
 tooling → CTAs → proof strip (since 2010 · AWS+GCP certified · AWS CB).

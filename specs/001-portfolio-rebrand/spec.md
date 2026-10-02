@@ -10,7 +10,7 @@ the Next.js site.
 
 ### US1 — Recruiter scans the profile (Priority: P1)
 A recruiter lands on the page, understands within 10 seconds who Soe Thura
-is (Software Engineer & DevOps Engineer), sees availability
+is (Software Engineer & DevOps), sees availability
 status, and can reach the résumé and contact actions from the sticky header.
 
 **Acceptance**: Hero shows name, title, availability ping, and two CTAs
@@ -52,6 +52,9 @@ announces expanded state, reduced-motion preference disables animations.
 - Q: Should the rebuilt site drop the old Experience timeline section,
   keeping only a compact Credentials badge row? → A: No — keep an Experience
   timeline section with refreshed, current dates (Credentials row also stays)
+- Q: Should the hero title say "Software Engineer & DevOps Engineer" or the
+  bio's literal "Software Engineer & DevOps"? → A: The literal bio string,
+  "Software Engineer & DevOps", used consistently (Principle VI mirror)
 - Q: Should the contact form stick with composing a mailto email by default,
   or should a form-submission service be set up now? → A: Set up a form
   service now (e.g., Formspree); POST is the default, mailto is the fallback
@@ -74,8 +77,8 @@ announces expanded state, reduced-motion preference disables animations.
   plus a DNS CNAME record `www` → `thixpin.github.io` (user-executed; a
   `CNAME` file is ignored when deploying via a GitHub Actions workflow).
 - FR-007: Deployed by GitHub Actions to GitHub Pages on push to `main`.
-- FR-008: Hero title reads "Software Engineer & DevOps Engineer", mirroring
-  the live GitHub bio (Principle VI); "AWS Community Builder" renders as a
+- FR-008: Hero title reads "Software Engineer & DevOps", mirroring the live
+  GitHub bio verbatim (Principle VI); "AWS Community Builder" renders as a
   badge in the Credentials row.
 - FR-009: Experience timeline lists roles with current, accurate dates that
   match the résumé PDF (Principle VI); no stale entries ship.
