@@ -100,7 +100,7 @@
 - [x] T021 [P] Dynamic year stamp in `index.html` inline JS (was T019)
 - [x] T022 [P] `.github/workflows/deploy.yml`: npm ci → Tailwind build → stage `_site` (no node_modules) → configure/upload/deploy Pages, `pages` concurrency group (was T020)
 - [x] T023 [P] `.gitignore`: node_modules, built CSS, .DS_Store (was T021)
-- [ ] T024 [P] `README.md`: project intro, local dev, deploy notes (was T022)
+- [X] T024 [P] `README.md`: project intro, local dev, deploy notes (was T022)
 - [ ] T025 (user-executed) Repo migration + custom domain per quickstart.md: archive old Next.js code on a branch, switch Pages source to "GitHub Actions", push new tree, set custom domain `www.thixpin.me` in Settings → Pages, create DNS CNAME `www` → `thixpin.github.io` (FR-006; no `CNAME` file — ignored by Actions deploys) — **requires T006 and T009 complete first (constitution VI gate)** (was T023)
 - [ ] T026 Local build + serve per quickstart.md; Chrome check: console clean, ping animates, fonts load (SC-004) (was T024)
 - [ ] T027 JS-disabled / API-blocked test per quickstart.md: all content renders from static fallback; contact form submits natively to the form-service endpoint (SC-003, FR-010) (was T025)
