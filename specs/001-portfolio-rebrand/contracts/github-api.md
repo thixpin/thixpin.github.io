@@ -1,35 +1,41 @@
-# Contract: GitHub REST API (consumed)
+# Contract: GitHub REST API (consumed at build time)
 
-Enriches static repo cards at runtime (FR-004, US2). Read-only, unauthenticated.
+Enriches curated repo cards during the build (FR-004, US2). Read-only.
+**The browser never calls this API** — revised 2026-10-02; enrichment moved
+from runtime to `build/render.mjs`.
 
-## Request
+## Request (one per curated repo in `content/projects.yml`)
 
 ```
-GET https://api.github.com/users/thixpin/repos?per_page=100
+GET https://api.github.com/repos/thixpin/{name}
 Accept: application/vnd.github+json
+Authorization: Bearer $GITHUB_TOKEN   # only when the env var is set (CI)
 ```
 
-One request per page load, fired after DOMContentLoaded.
+Issued with `Promise.allSettled` and an `AbortController` timeout (~10 s).
+In GitHub Actions the automatic `GITHUB_TOKEN` is passed as an env var to
+the build step (1,000 req/h; nothing to configure, never written to output).
+Local builds work unauthenticated (60 req/h is ample for 6 repos).
 
 ## Fields consumed
 
-| JSON field | Maps to |
-|---|---|
-| `name` | card match key (`data-repo`) |
-| `description` | card description |
-| `language` | `data-field="language"` |
-| `stargazers_count` | `data-field="stars"` |
-| `html_url` | card link (verification only; static href is authoritative) |
-
-All other fields ignored. Cards whose `data-repo` has no match in the
-response keep their static content.
-
-## Failure modes (all → silent catch, static fallback persists)
-
-| Mode | Trigger | Behavior |
+| JSON field | Maps to | Fallback (content/projects.yml) |
 |---|---|---|
-| Rate limit | 403 (60 req/h/IP unauthenticated) | no retry, no console error surfaced to user; status line keeps fallback wording |
-| Network / offline | fetch rejects | same |
-| Non-200 / malformed JSON | anything else | same |
+| `description` | card description | curated description |
+| `language` | language label | curated language |
+| `stargazers_count` | stars | curated stars (must never exceed reality — constitution VI) |
+| `forks_count` | forks | curated forks (optional) |
+| `html_url` | card link | `https://github.com/thixpin/<name>` |
+| `homepage` | "Live ↗" link when non-empty | curated homepage (optional) |
+| `topics` | up to 3 extra tags | curated topics (optional) |
 
-Spec SC-004: the caught API failure is the only permitted failed request.
+## Failure modes (per repo, never fails the build)
+
+| Mode | Behavior |
+|---|---|
+| 403 / 429 rate limit | that repo keeps its YAML fallback; CI `::warning::` |
+| Network / timeout / non-200 / bad JSON | same |
+
+When the API succeeds and a live value differs from the fallback, the build
+logs one line per field (e.g. `pitway stars: fallback 20 → live 23`) so the
+owner can refresh fallbacks occasionally.

@@ -1,23 +1,21 @@
 # Data Model: Portfolio Rebrand
 
-No database — every entity is authored statically in `index.html`. This
-documents the shape, validation rules, and the one runtime state transition.
+No database — every entity is authored in `content/` (YAML structured data,
+Markdown prose) and rendered into static HTML at build time (FR-012). This
+documents the shape, validation rules, and the one build-time transition.
 
 ## RepoCard
 
-Curated open-source project card (6 instances, FR-004, US2).
+Curated open-source project card (6 instances, FR-004, US2). Authored in
+`content/projects.yml`: `name` (must equal the GitHub repo name exactly),
+curated `description`/`language`/`stars` fallbacks, optional `badge`,
+`forks`/`homepage`/`topics` fallbacks, and ordering.
 
-| Field | Source | Notes |
-|---|---|---|
-| `data-repo` | static | key — must equal the GitHub repo name exactly |
-| name, description | static, enriched | fallback text in markup |
-| language | static, enriched | `data-field="language"` hook |
-| stars | static, enriched | `data-field="stars"` hook; fallback must never exceed reality (constitution VI) |
-| url | static | `https://github.com/thixpin/<repo>` |
-
-**State transition**: `static` → `enriched`. Enrichment overwrites a field
-only when the GitHub API call returns 200 and the repo matches `data-repo`;
-on 403/network/non-200 the static state persists (contracts/github-api.md).
+**Build-time transition**: `fallback` → `enriched`. `build/render.mjs`
+overwrites a field only when `GET /repos/thixpin/{name}` returns 200; on any
+failure that repo's YAML fallback renders (contracts/github-api.md).
+Fallback stars must never exceed reality (constitution VI). No runtime
+transition exists — the browser makes no GitHub calls.
 
 ## ClientWorkCard
 

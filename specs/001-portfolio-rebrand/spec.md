@@ -21,8 +21,10 @@ A fellow engineer reviews the capabilities grid and project showcase,
 follows repo links to GitHub, and sees live star counts and languages.
 
 **Acceptance**: Six curated repos render with name, description, language,
-stars, and link. Stats refresh from the GitHub API when reachable; static
-fallback values render otherwise (JS off, rate-limited, offline).
+stars (plus forks/topics/homepage where available), and link — enriched
+from the GitHub API **at build time** and baked into the HTML. When the API
+is unreachable during a build, the curated YAML fallback values render
+instead. The browser never calls the GitHub API.
 
 ### US3 — Client makes contact (Priority: P2)
 A potential client submits the contact form or uses direct links
@@ -38,6 +40,16 @@ A keyboard or screen-reader user navigates all sections.
 
 **Acceptance**: Skip link, landmark roles, focus-visible rings, menu toggle
 announces expanded state, reduced-motion preference disables animations.
+
+### US5 — Owner updates content (Priority: P2)
+The site owner updates portfolio content — profile, experience, projects,
+credentials, capabilities, social links — by editing YAML/Markdown files,
+never the HTML template.
+
+**Acceptance**: All portfolio content lives in `content/` (YAML for
+structured data, Markdown for prose); the template holds structure and
+presentation only; `npm run build` regenerates `index.html` with the edited
+content baked in.
 
 ## Clarifications
 
@@ -58,6 +70,17 @@ announces expanded state, reduced-motion preference disables animations.
 - Q: Should the contact form stick with composing a mailto email by default,
   or should a form-submission service be set up now? → A: Set up a form
   service now (e.g., Formspree); POST is the default, mailto is the fallback
+  (provider finalized later the same day: Web3Forms, key injected from an
+  Actions secret at deploy time)
+- Q: Should the site offer light/dark themes? → A: Yes — toggle in the
+  header, system preference on first visit, persisted in localStorage, no
+  flash of wrong theme, both themes AA contrast (FR-011)
+- Q: Where does portfolio content live? → A: In `content/` YAML/Markdown
+  files, rendered into static HTML at build time by a small Node script; the
+  template is structure-only, no runtime framework (FR-012)
+- Q: Runtime or build-time GitHub stats? → A: Build time — per-repo API
+  fetch during the build embeds stars/forks/language/description/topics/
+  homepage into the HTML with YAML fallbacks; no browser API calls (FR-004)
 
 ## Functional Requirements
 
@@ -67,10 +90,13 @@ announces expanded state, reduced-motion preference disables animations.
   and active-section highlighting (IntersectionObserver).
 - FR-003: Hero includes animated crimson status ping reading
   "Available for Infrastructure & Platform Engineering".
-- FR-004: Repo cards enrich from
-  `https://api.github.com/users/thixpin/repos` with graceful degradation.
-- FR-005: Card hover raises the card with crimson glow
-  `0 0 20px rgba(239,68,68,0.15)`.
+- FR-004: Repo cards enrich **at build time** from
+  `GET https://api.github.com/repos/thixpin/{name}` per curated repo
+  (stars, forks, language, description, homepage, topics), with per-repo
+  graceful fallback to the curated YAML values on any API failure; the
+  build never fails on API errors and the browser makes no GitHub calls.
+- FR-005: Card hover raises the card with a crimson accent glow
+  (accent token at 15% alpha).
 - FR-006: SEO: title/description, canonical URL `https://www.thixpin.me/`,
   Open Graph + Twitter cards (absolute image URLs on that domain), JSON-LD
   Person schema. The custom domain is configured in repo Settings → Pages
@@ -86,11 +112,20 @@ announces expanded state, reduced-motion preference disables animations.
   owner-provisioned `access_key` field, so submission works natively with
   JavaScript disabled. JS enhances with validation, sending states, and
   mailto composition as the fallback when the POST fails.
+- FR-011: Light/Dark theme — system preference on first visit, header
+  toggle with accessible name/state, choice persisted in localStorage, no
+  flash of the wrong theme (synchronous head init snippet), both themes
+  meet WCAG AA contrast for text (≥4.5:1) and UI (≥3:1).
+- FR-012: All portfolio content lives in `content/` (YAML structured data +
+  Markdown prose) and is rendered into `index.html` at build time by
+  `build/render.mjs` from the `src/index.eta` template; the generated
+  `index.html` is a gitignored build artifact and the template contains no
+  portfolio content.
 
 ## Success Criteria
 
 - SC-001: Lighthouse ≥ 95 Performance / Accessibility / Best Practices / SEO.
 - SC-002: Page weight (excl. fonts/photo) < 60 KB.
 - SC-003: Fully usable with JavaScript disabled.
-- SC-004: Clean console; no failed requests besides an optionally
-  rate-limited GitHub API call, which is caught and handled.
+- SC-004: Clean console; no failed requests (the GitHub API is no longer
+  called from the browser).

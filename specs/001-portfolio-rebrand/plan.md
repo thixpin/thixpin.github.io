@@ -14,9 +14,9 @@ deploys to Pages.
 
 ## Technical Context
 
-**Language/Version**: HTML5, CSS (Tailwind v3.4 via CLI), JavaScript ES6+ (inline, no deps)
+**Language/Version**: HTML5, CSS (Tailwind v3.4 via CLI), JavaScript ES6+ (inline, no deps); Node ESM build script
 
-**Primary Dependencies**: `tailwindcss@^3.4` (devDependency, CLI build only); no runtime dependencies
+**Primary Dependencies**: devDependencies only — `tailwindcss@^3.4` (CSS build) plus `eta` (template), `js-yaml` (content), `marked` (prose) for the build-time renderer; zero runtime dependencies
 
 **Storage**: N/A — static site; repo stats fetched at runtime with fallbacks baked into markup; contact submissions POSTed to an external form service, nothing persisted here
 
@@ -41,16 +41,12 @@ spec's Clarifications session (2026-10-02).
 
 | Principle | Status |
 |---|---|
-| I Zero-framework | PASS — no runtime deps |
-| II Static-first | PASS — fallback data baked into markup; form POSTs natively via `action` |
-| III Tokens | PASS — all colors via config tokens |
-| IV A11y | PASS — skip link, ARIA, reduced-motion |
-| V Perf budget | PASS — 22 KB CSS, no external JS |
-| VI Truthful content | PENDING — hero title + head metadata rework (T006/T009) to mirror the GitHub bio per FR-008; certs verifiable |
-
-Gate result: PASS — the one PENDING row is a tracked implementation gap
-(open tasks T006/T009), not a plan-level violation; nothing has deployed to
-`main`, and those tasks must complete before T025 pushes.
+| I Zero-framework | PASS — no runtime deps; build-time renderer codified in constitution v1.1.0 |
+| II Static-first | PASS — all content (incl. repo stats) baked into generated HTML; form POSTs natively via `action` |
+| III Tokens | PASS — config tokens backed by CSS custom properties, both themes |
+| IV A11y | PASS — skip link, ARIA, reduced-motion; keyboard walkthrough verified (T029) |
+| V Perf budget | PASS — ~23 KB CSS, no external JS, Lighthouse 100×4 measured |
+| VI Truthful content | PASS — title mirrors the bio verbatim, Experience dates match the résumé, Bangkok consistent, certs verifiable (CKA URL pending) |
 
 ## Project Structure
 
@@ -70,13 +66,22 @@ specs/001-portfolio-rebrand/
 
 ```text
 thixpin.github.io/
-├── index.html                  # entire site: markup + inline JS
-├── src/input.css               # Tailwind layers + component classes
-├── tailwind.config.js          # design tokens (colors, fonts, glow)
-├── package.json                # tailwindcss devDependency, build scripts
+├── index.html                  # build artifact (gitignored): rendered from the template
+├── src/index.eta               # the page template: structure + presentation only
+├── src/input.css               # Tailwind layers, component classes, theme CSS variables
+├── build/render.mjs            # build-time renderer: YAML/Markdown + GitHub API → index.html
+├── content/                    # owner-editable portfolio content
+│   ├── site.yml                # profile, title, SEO, socials, contact, availability
+│   ├── capabilities.yml
+│   ├── experience.yml
+│   ├── projects.yml            # curated repos (selection/order/fallbacks) + client work
+│   ├── credentials.yml
+│   └── about.md                # hero prose (Markdown)
+├── tailwind.config.js          # design tokens referencing the CSS variables
+├── package.json                # devDependencies + render/build scripts
 ├── assets/
 │   ├── css/style.css           # build artifact (gitignored)
-│   ├── favicons/               # carried over from old repo
+│   ├── favicons/
 │   ├── images/                 # thixpin.jpg (640px), og-preview.png
 │   └── resume.pdf
 ├── .github/workflows/deploy.yml
@@ -109,6 +114,14 @@ active-nav, GitHub API enrichment with catch-and-ignore fallback, contact
 form (validate → POST to the form-service `action`, mailto fallback on
 POST failure), year stamp.
 
+### Phase 4 — Content pipeline, theming & build enrichment (added 2026-10-02)
+Content externalized to `content/` YAML/Markdown; `build/render.mjs` renders
+`src/index.eta` → `index.html` (gitignored artifact) and enriches curated
+repo cards from the GitHub API at build time with YAML fallbacks; runtime
+GitHub fetch removed. Light/Dark themes via CSS custom properties +
+`data-theme`, header toggle, system default, localStorage persistence,
+head init snippet against FOUC.
+
 ### Phase 3 — CI/CD & migration
 `deploy.yml` (build → stage `_site` → upload → deploy), `.gitignore`,
 README. Migration steps for the existing repo documented in quickstart.md.
@@ -120,8 +133,12 @@ Actions-based deploys).
 
 1. **Tailwind CLI over Play CDN** — production requirement wins; CDN is a
    dev-only JIT runtime (research.md).
-2. **Allowlist + enrichment over dynamic top-N** — survives the 60 req/h
-   unauthenticated API limit and a 113-repo account full of forks.
+2. **Curated allowlist + build-time enrichment (revised 2026-10-02)** —
+   repo selection/order/custom copy stay in `content/projects.yml`; the
+   build fetches `GET /repos/thixpin/{name}` per curated repo
+   (`Promise.allSettled`, ~10 s timeout, per-repo YAML fallback, build never
+   fails on API errors) using the Actions-provided `GITHUB_TOKEN` when set.
+   No browser API calls — stats are as fresh as the last deploy.
 3. **Form service POST (clarified 2026-10-02)** — the endpoint lives in the
    form's `action`, so native submit works without JS; mailto is the JS-side
    fallback on POST failure. The owner provisions the service account; no
@@ -131,6 +148,14 @@ Actions-based deploys).
 5. **Experience timeline kept (clarified 2026-10-02)** — rebuilt with
    current, accurate dates matching the résumé PDF (FR-009); stale entries
    never ship.
+6. **Eta + js-yaml + marked over a static-site framework** — three tiny
+   devDependencies and one Node script satisfy build-time rendering without
+   migrating to Astro/React; the shipped site is unchanged in kind
+   (constitution I amended v1.1.0 to codify the build step).
+7. **Themes via CSS custom properties + `data-theme`** — tokens keep their
+   Tailwind names; `prefers-color-scheme` provides the no-JS default, the
+   head snippet applies the persisted choice pre-paint, `display=optional`
+   fonts stay. No Education section added (approved content unchanged).
 
 ## Complexity Tracking
 
