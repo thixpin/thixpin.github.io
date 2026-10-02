@@ -82,8 +82,8 @@ announces expanded state, reduced-motion preference disables animations.
   badge in the Credentials row.
 - FR-009: Experience timeline lists roles with current, accurate dates that
   match the résumé PDF (Principle VI); no stale entries ship.
-- FR-010: Contact form's `action` is the form service POST endpoint
-  (owner-provisioned; e.g., Formspree), so submission works natively with
+- FR-010: Contact form's `action` is the Web3Forms POST endpoint with an
+  owner-provisioned `access_key` field, so submission works natively with
   JavaScript disabled. JS enhances with validation, sending states, and
   mailto composition as the fallback when the POST fails.
 

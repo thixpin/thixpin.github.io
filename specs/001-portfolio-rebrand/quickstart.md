@@ -87,11 +87,14 @@ in repo settings instead:
 
 ## Contact form backend (required — task T019 → T020)
 
-Per spec FR-010: create a form service form (e.g. Formspree), then set the
-real endpoint as the `action` of `<form id="contact-form">` so native POST
-works with JavaScript disabled. JS enhances with validation and sending
+Per spec FR-010: the form POSTs to Web3Forms (free plan). Get an access key
+at <https://web3forms.com> for thixpin@gmail.com and paste it into the
+hidden `access_key` input of `<form id="contact-form">` in `index.html`.
+Native POST works with JavaScript disabled; JS adds validation and sending
 states and composes a `mailto:` only as fallback when the POST fails.
-Never commit a fabricated endpoint ID.
+Never commit a fabricated access key — until the real key is pasted, JS
+submissions fall back to mailto and no-JS submissions show a Web3Forms
+error page.
 
 ## Updating content
 

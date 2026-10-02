@@ -458,8 +458,19 @@
             </ul>
           </div>
 
-          <!-- Set data-endpoint to a form backend URL (e.g. Formspree) to POST JSON; otherwise submitting opens the visitor's mail client. -->
-          <form id="contact-form" class="card space-y-5" data-endpoint="" data-mailto="thixpin@gmail.com" novalidate>
+          <!-- Web3Forms backend; paste the site's access key below (T019). JS falls back to mailto if the POST fails. -->
+          <form
+            id="contact-form"
+            class="card space-y-5"
+            method="POST"
+            action="https://api.web3forms.com/submit"
+            data-mailto="thixpin@gmail.com"
+            novalidate
+          >
+            <input type="hidden" name="access_key" value="" />
+            <input type="hidden" name="subject" value="Portfolio enquiry via thixpin.me" />
+            <input type="hidden" name="from_name" value="thixpin.me portfolio" />
+            <input type="checkbox" name="botcheck" class="hidden" tabindex="-1" aria-hidden="true" />
             <div>
               <label for="cf-name" class="text-sm font-medium text-ink">Name</label>
               <input id="cf-name" name="name" type="text" class="field" autocomplete="name" required />
@@ -582,21 +593,13 @@
           }
 
           const data = Object.fromEntries(new FormData(form));
-          const endpoint = form.dataset.endpoint;
-
-          if (!endpoint) {
-            const subject = encodeURIComponent(`Portfolio enquiry from ${data.name}`);
-            const body = encodeURIComponent(`${data.message}\n\n— ${data.name} <${data.email}>`);
-            window.location.href = `mailto:${form.dataset.mailto}?subject=${subject}&body=${body}`;
-            showStatus('Opening your email client…');
-            return;
-          }
+          delete data.botcheck; // honeypot: never forward, even if a browser serializes it
 
           const button = form.querySelector('button[type="submit"]');
           button.disabled = true;
           showStatus('Sending…');
           try {
-            const res = await fetch(endpoint, {
+            const res = await fetch(form.action, {
               method: 'POST',
               headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
               body: JSON.stringify(data),
@@ -605,7 +608,11 @@
             form.reset();
             showStatus('Thanks — your message has been sent.');
           } catch {
-            showStatus('Sending failed. Please email thixpin@gmail.com directly.', true);
+            // POST failed: compose the same message in the visitor's mail client.
+            const subject = encodeURIComponent(`Portfolio enquiry from ${data.name}`);
+            const body = encodeURIComponent(`${data.message}\n\n— ${data.name} <${data.email}>`);
+            window.location.href = `mailto:${form.dataset.mailto}?subject=${subject}&body=${body}`;
+            showStatus('Sending failed — opening your email client instead.', true);
           } finally {
             button.disabled = false;
           }
