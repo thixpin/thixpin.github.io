@@ -1,7 +1,8 @@
 # Curated repos: selection, order and fallback values. The build enriches
 # these from the GitHub API (stars/forks/language/description/homepage/
 # topics); on API failure the values below render as-is. Fallback stars must
-# never exceed reality (constitution VI).
+# never exceed reality (constitution VI). Set `keep_description: true` on a
+# repo to pin its curated description instead of the live GitHub one.
 heading: Open source on GitHub
 all_repos_url: https://github.com/thixpin?tab=repositories
 status_note: Highlighted repositories

@@ -55,7 +55,6 @@
         href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=optional"
       />
     </noscript>
-    <link rel="preconnect" href="https://api.github.com" crossorigin />
     <link rel="stylesheet" href="./assets/css/style.css" />
 
     <script type="application/ld+json">
@@ -212,12 +211,12 @@
               All repositories ↗
             </a>
           </div>
-          <p id="repo-status" class="mt-4 font-mono text-xs text-muted" aria-live="polite"><%= it.projects.status_line %></p>
+          <p id="repo-status" class="mt-4 font-mono text-xs text-muted"><%= it.projects.status_line %></p>
 
-          <!-- Static fallback content. JS refreshes stars/description/language from the GitHub API when available. -->
+          <!-- Repo stats are fetched from the GitHub API at build time (build/render.mjs); no browser API calls. -->
           <ul id="repo-grid" class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3" role="list">
 <% it.projects.repos.forEach((r) => { %>
-            <li class="card card-interactive relative flex flex-col" data-repo="<%= r.name %>">
+            <li class="card card-interactive relative flex flex-col">
               <div class="flex items-start justify-between gap-3">
                 <h3 class="font-mono text-base font-medium text-ink">
                   <a class="after:absolute after:inset-0 after:rounded-xl" href="<%= r.url %>" target="_blank" rel="noopener"><%= r.name %></a>
@@ -226,13 +225,13 @@
                 <span class="tag tag-accent shrink-0"><%= r.badge %></span>
 <% } %>
               </div>
-              <p class="mt-3 flex-1 text-sm leading-relaxed text-muted" data-field="description"><%= r.description %></p>
+              <p class="mt-3 flex-1 text-sm leading-relaxed text-muted"><%= r.description %></p>
 <% if (r.topics && r.topics.length) { %>
               <p class="mt-4 flex flex-wrap gap-2"><% r.topics.slice(0, 3).forEach((t) => { %><span class="tag"><%= t %></span><% }) %></p>
 <% } %>
               <p class="mt-6 flex items-center gap-4 font-mono text-xs text-muted">
-                <span class="inline-flex items-center gap-1.5"><span class="h-2 w-2 rounded-full <%= r.language_accent ? 'bg-accent' : 'bg-muted' %>" aria-hidden="true"></span><span data-field="language"><%= r.language %></span></span>
-                <span class="inline-flex items-center gap-1" aria-label="Stars"><svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.94 5.96 6.56.95-4.75 4.63 1.12 6.54L12 17.5l-5.87 3.08 1.12-6.54L2.5 9.41l6.56-.95z" /></svg><span data-field="stars"><%= r.stars %></span></span>
+                <span class="inline-flex items-center gap-1.5"><span class="h-2 w-2 rounded-full <%= r.language_accent ? 'bg-accent' : 'bg-muted' %>" aria-hidden="true"></span><span><%= r.language %></span></span>
+                <span class="inline-flex items-center gap-1" aria-label="Stars"><svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.94 5.96 6.56.95-4.75 4.63 1.12 6.54L12 17.5l-5.87 3.08 1.12-6.54L2.5 9.41l6.56-.95z" /></svg><span><%= r.stars %></span></span>
 <% if (r.forks !== undefined && r.forks !== null) { %>
                 <span class="inline-flex items-center gap-1" aria-label="Forks"><svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="6" cy="5" r="2.2" /><circle cx="18" cy="5" r="2.2" /><circle cx="12" cy="19" r="2.2" /><path d="M6 7v2a4 4 0 0 0 4 4h4a4 4 0 0 0 4-4V7M12 13v4" /></svg><span><%= r.forks %></span></span>
 <% } %>
@@ -391,8 +390,6 @@
       (() => {
         'use strict';
 
-        const GITHUB_USER = '<%= it.site.handle %>';
-
         // ---- Mobile navigation ----
         const toggle = document.getElementById('nav-toggle');
         const mobileNav = document.getElementById('mobile-nav');
@@ -425,36 +422,6 @@
         document.querySelectorAll('main section[id]').forEach((section) => observer.observe(section));
 
         document.getElementById('year').textContent = new Date().getFullYear();
-
-        // ---- GitHub repositories: enrich the static cards with live data ----
-        const repoStatus = document.getElementById('repo-status');
-        const cards = new Map([...document.querySelectorAll('[data-repo]')].map((el) => [el.dataset.repo.toLowerCase(), el]));
-        const setField = (card, field, value) => {
-          const el = card.querySelector(`[data-field="${field}"]`);
-          if (el && value !== null && value !== undefined && value !== '') el.textContent = value;
-        };
-
-        fetch(`https://api.github.com/users/${GITHUB_USER}/repos?per_page=100&type=owner`, {
-          headers: { Accept: 'application/vnd.github+json' },
-        })
-          .then((res) => {
-            if (!res.ok) throw new Error(`GitHub API responded ${res.status}`);
-            return res.json();
-          })
-          .then((repos) => {
-            repos.forEach((repo) => {
-              const card = cards.get(repo.name.toLowerCase());
-              if (!card) return;
-              setField(card, 'stars', repo.stargazers_count.toLocaleString());
-              setField(card, 'language', repo.language);
-              setField(card, 'description', repo.description);
-            });
-            repoStatus.textContent = `Highlighted repositories · stats updated ${new Date().toLocaleDateString()}`;
-          })
-          .catch(() => {
-            // Rate-limited (403) or offline: the static cards already show sensible data.
-            repoStatus.textContent = 'Highlighted repositories';
-          });
 
         // ---- Contact form ----
         const form = document.getElementById('contact-form');

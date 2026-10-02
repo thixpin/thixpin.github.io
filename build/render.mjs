@@ -40,6 +40,48 @@ marked.use({
 });
 const mdInline = (s) => marked.parseInline(s.trim());
 
+// Build-time GitHub enrichment (FR-004, contracts/github-api.md): per-repo
+// fetch with per-repo fallback to the YAML values; never fails the build.
+const warn = (msg) =>
+  console.warn(process.env.GITHUB_ACTIONS ? `::warning::${msg}` : `WARN: ${msg}`);
+
+async function enrichRepos(repos, owner) {
+  const headers = { Accept: 'application/vnd.github+json' };
+  if (process.env.GITHUB_TOKEN) headers.Authorization = `Bearer ${process.env.GITHUB_TOKEN}`;
+
+  await Promise.allSettled(
+    repos.map(async (r) => {
+      const ctl = new AbortController();
+      const timer = setTimeout(() => ctl.abort(), 10_000);
+      try {
+        const res = await fetch(`https://api.github.com/repos/${owner}/${r.name}`, {
+          headers,
+          signal: ctl.signal,
+        });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const gh = await res.json();
+        const apply = (field, live) => {
+          if (live === null || live === undefined || live === '') return;
+          if (r[field] !== undefined && String(r[field]) !== String(live))
+            console.log(`render: ${r.name} ${field}: fallback ${JSON.stringify(r[field])} → live ${JSON.stringify(live)}`);
+          r[field] = live;
+        };
+        if (!r.keep_description) apply('description', gh.description);
+        apply('language', gh.language);
+        apply('stars', gh.stargazers_count);
+        apply('forks', gh.forks_count);
+        apply('url', gh.html_url);
+        apply('homepage', gh.homepage);
+        if (Array.isArray(gh.topics) && gh.topics.length) r.topics = gh.topics;
+      } catch (e) {
+        warn(`GitHub enrichment failed for ${r.name} (${e.message}); using YAML fallback.`);
+      } finally {
+        clearTimeout(timer);
+      }
+    })
+  );
+}
+
 export async function buildData() {
   const site = loadYaml('content/site.yml');
   const capabilities = loadYaml('content/capabilities.yml');
@@ -50,7 +92,18 @@ export async function buildData() {
   projects.repos.forEach((r) => {
     r.url = r.url || `https://github.com/${site.handle}/${r.name}`;
   });
-  projects.status_line = 'Highlighted repositories · live stats from the GitHub API';
+  await enrichRepos(projects.repos, site.handle);
+  projects.repos.forEach((r) => {
+    r.stars = Number(r.stars).toLocaleString('en-US');
+    if (r.forks !== undefined && r.forks !== null)
+      r.forks = Number(r.forks).toLocaleString('en-US');
+  });
+  const built = new Date().toLocaleDateString('en-GB', {
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric',
+  });
+  projects.status_line = `Highlighted repositories · stats as of ${built}`;
 
   const data = {
     site: escDeep(site),
