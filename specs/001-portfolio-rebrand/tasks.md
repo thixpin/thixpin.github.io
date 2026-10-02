@@ -47,7 +47,7 @@
 
 - [X] T009 [US1] Hero rework in `index.html`: crimson status ping ("Available for Infrastructure & Platform Engineering", FR-003), name + title "Software Engineer & DevOps" (FR-008), positioning copy, two CTAs, proof-strip `<dl>`, framed portrait (grayscale → color on hover) (was T008)
 - [X] T010 [US1] Experience timeline section in `index.html`: ExperienceEntry rows (role, organization, start, end-or-"Present", 1–2 line summary) — **dates must match `assets/resume.pdf`** (FR-009, data-model.md); no stale entries ship; add nav link + section anchor (was T029)
-- [X] T011 [US1] Credentials rework in `index.html`: linked cert badge row (Credly/GCP/LFCS/GitHub — verification URL required per data-model.md CredentialBadge) + "AWS Community Builder" badge (FR-008), community line (instructor, Myanmar Unicode Area, Kalaung) (was T011)
+- [X] T011 [US1] Credentials rework in `index.html`: linked cert badge row (Credly/GCP/LFCS/GitHub — verification URL required per data-model.md CredentialBadge) + "AWS Community Builder" badge (FR-008), community line (instructor, Myanmar Unicode Area, Kalaung) (was T011) — note: CKA badge added 2026-10-02, pending its Credly URL
 
 **Checkpoint**: US1 acceptance passes independently — MVP ready.
 
