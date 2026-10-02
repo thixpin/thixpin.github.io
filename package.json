@@ -1,0 +1,15 @@
+{
+  "name": "thixpin.github.io",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Portfolio of Soe Thura (@thixpin) — static HTML + Tailwind CSS v3, deployed to GitHub Pages.",
+  "scripts": {
+    "dev": "tailwindcss -i ./src/input.css -o ./assets/css/style.css --watch",
+    "build": "tailwindcss -i ./src/input.css -o ./assets/css/style.css --minify",
+    "serve": "python3 -m http.server 8080"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.17"
+  },
+  "license": "MIT"
+}

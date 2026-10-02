@@ -1,0 +1,105 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+    color-scheme: dark;
+  }
+
+  body {
+    @apply bg-bg font-sans text-ink antialiased;
+  }
+
+  ::selection {
+    @apply bg-accent/30 text-ink;
+  }
+
+  :focus-visible {
+    @apply outline-none ring-2 ring-accent ring-offset-2 ring-offset-bg;
+  }
+}
+
+@layer components {
+  .container-site {
+    @apply mx-auto w-full max-w-site px-4 sm:px-6 lg:px-8;
+  }
+
+  .section {
+    @apply border-t border-line py-20 sm:py-24;
+  }
+
+  .eyebrow {
+    @apply font-mono text-xs uppercase tracking-[0.2em] text-accent;
+  }
+
+  .section-title {
+    @apply mt-3 text-3xl font-bold tracking-tight text-ink sm:text-4xl;
+  }
+
+  .card {
+    @apply rounded-xl border border-line bg-surface p-6 transition duration-300;
+  }
+
+  .card-interactive {
+    @apply hover:-translate-y-0.5 hover:border-accent/40 hover:shadow-glow focus-within:border-accent/40 focus-within:shadow-glow;
+  }
+
+  .tag {
+    @apply inline-flex items-center rounded-md border border-line bg-bg px-2 py-0.5 font-mono text-xs text-muted;
+  }
+
+  .tag-accent {
+    @apply border-accent/40 text-accent;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg px-5 py-2.5 text-sm font-semibold transition duration-200;
+  }
+
+  .btn-primary {
+    @apply btn bg-ink text-bg hover:bg-accent hover:text-ink hover:shadow-glow;
+  }
+
+  .btn-ghost {
+    @apply btn border border-line text-ink hover:border-accent/60 hover:text-accent;
+  }
+
+  .nav-link {
+    @apply rounded-md px-3 py-2 text-sm text-muted transition-colors hover:text-ink;
+  }
+
+  .nav-link[aria-current='true'] {
+    @apply text-ink;
+  }
+
+  .field {
+    @apply mt-2 w-full rounded-lg border border-line bg-bg px-4 py-3 text-sm text-ink placeholder:text-zinc-600 transition focus:border-accent/60 focus:outline-none focus:ring-2 focus:ring-accent/30;
+  }
+}
+
+@layer utilities {
+  .bg-grid {
+    background-image:
+      linear-gradient(to right, rgba(39, 39, 42, 0.45) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(39, 39, 42, 0.45) 1px, transparent 1px);
+    background-size: 48px 48px;
+    mask-image: radial-gradient(ellipse at top, #000 30%, transparent 75%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
