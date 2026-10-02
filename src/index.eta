@@ -9,8 +9,17 @@
       content="<%= it.site.description %>"
     />
     <meta name="author" content="<%= it.site.name %>" />
-    <meta name="theme-color" content="<%= it.site.theme_color_dark %>" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="<%= it.site.theme_color_light %>" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="<%= it.site.theme_color_dark %>" />
     <link rel="canonical" href="<%= it.site.canonical %>" />
+
+    <!-- Theme init: apply the persisted choice before first paint (no FOUC). -->
+    <script>
+      try {
+        var t = localStorage.getItem('theme');
+        if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t;
+      } catch (e) {}
+    </script>
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
@@ -96,6 +105,20 @@
           </ul>
         </nav>
 
+        <div class="flex items-center gap-2">
+        <button
+          type="button"
+          id="theme-toggle"
+          class="inline-flex h-10 w-10 items-center justify-center rounded-md border border-line text-muted transition-colors hover:border-accent/40 hover:text-ink"
+          aria-label="Toggle color theme"
+        >
+          <svg class="icon-sun h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="4" /><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
+          </svg>
+          <svg class="icon-moon h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+          </svg>
+        </button>
         <button
           type="button"
           id="nav-toggle"
@@ -108,6 +131,7 @@
             <path d="M4 7h16M4 12h16M4 17h16" />
           </svg>
         </button>
+        </div>
       </div>
 
       <nav id="mobile-nav" aria-label="Mobile" class="hidden border-t border-line md:hidden">
@@ -422,6 +446,27 @@
         document.querySelectorAll('main section[id]').forEach((section) => observer.observe(section));
 
         document.getElementById('year').textContent = new Date().getFullYear();
+
+        // ---- Theme toggle ----
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeMetas = document.querySelectorAll('meta[name="theme-color"]');
+        const systemDark = window.matchMedia('(prefers-color-scheme: dark)');
+        const themeColors = { dark: '<%= it.site.theme_color_dark %>', light: '<%= it.site.theme_color_light %>' };
+        const effectiveTheme = () => document.documentElement.dataset.theme || (systemDark.matches ? 'dark' : 'light');
+        const syncThemeUi = () => {
+          themeToggle.setAttribute('aria-label', effectiveTheme() === 'dark' ? 'Switch to light theme' : 'Switch to dark theme');
+        };
+        themeToggle.addEventListener('click', () => {
+          const next = effectiveTheme() === 'dark' ? 'light' : 'dark';
+          document.documentElement.dataset.theme = next;
+          try {
+            localStorage.setItem('theme', next);
+          } catch {}
+          themeMetas.forEach((m) => m.setAttribute('content', themeColors[next]));
+          syncThemeUi();
+        });
+        systemDark.addEventListener('change', syncThemeUi);
+        syncThemeUi();
 
         // ---- Contact form ----
         const form = document.getElementById('contact-form');
