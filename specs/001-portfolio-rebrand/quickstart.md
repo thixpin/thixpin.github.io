@@ -17,16 +17,21 @@ with its template; if so, restore this repo's version (or run
 ## Local development
 
 ```bash
-npm install          # installs tailwindcss (only dependency)
-npm run dev          # Tailwind watch → assets/css/style.css
+npm install          # dev-only deps: tailwindcss, eta, js-yaml, marked
+npm run render       # content/*.yml + about.md + src/index.eta → index.html
+npm run dev          # render once, then Tailwind watch → assets/css/style.css
 npm run serve        # http://localhost:8080 (separate terminal)
 ```
 
 One-off production build:
 
 ```bash
-npm run build        # minified CSS
+npm run build        # render (incl. GitHub API enrichment) + minified CSS
 ```
+
+`index.html` and `assets/css/style.css` are generated build artifacts
+(gitignored). Tailwind watch does not re-render the template — run
+`npm run render` again after content or template edits.
 
 ## Deploying to GitHub Pages (migration from the Next.js site)
 
@@ -99,10 +104,15 @@ which is also the local-dev behavior, since the key only exists in CI.
 
 ## Updating content
 
+Never edit `index.html` (generated) — edit `content/` and rebuild:
+
 | What | Where |
 |---|---|
-| Hero copy / availability line | `index.html` hero section |
-| Curated repos | `#repo-grid` cards (`data-repo` must equal the GitHub repo name); fallback stars/language in the card body |
-| Capabilities, certs, client work | corresponding `index.html` sections |
-| Colors / fonts / glow | `tailwind.config.js` tokens |
-| Component styles | `src/input.css` `@layer components` |
+| Profile, title, SEO, availability, socials, contact, nav | `content/site.yml` |
+| Hero prose | `content/about.md` (Markdown; `` `code` `` renders accented) |
+| Capabilities | `content/capabilities.yml` |
+| Curated repos (selection, order, fallbacks; `name` must equal the GitHub repo name; `keep_description: true` pins curated copy over the live GitHub description) + client work | `content/projects.yml` |
+| Experience (dates must match `assets/resume.pdf`) | `content/experience.yml` |
+| Certs + community line | `content/credentials.yml` |
+| Colors / fonts / glow (both themes) | `src/input.css` CSS variables + `tailwind.config.js` tokens |
+| Page structure / presentation | `src/index.eta` |
