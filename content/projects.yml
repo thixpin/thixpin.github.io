@@ -1,0 +1,63 @@
+# Curated repos: selection, order and fallback values. The build enriches
+# these from the GitHub API (stars/forks/language/description/homepage/
+# topics); on API failure the values below render as-is. Fallback stars must
+# never exceed reality (constitution VI).
+heading: Open source on GitHub
+all_repos_url: https://github.com/thixpin?tab=repositories
+status_note: Highlighted repositories
+repos:
+  - name: pitway
+    badge: building
+    description: >-
+      The pit crew for agentic coding — control how AI coding agents plan,
+      execute, verify and leave a traceable record of their work.
+    language: TypeScript
+    language_accent: true
+    stars: 20
+  - name: agentic-basic
+    badge: most starred
+    description: >-
+      Agentic coding basics for junior developers — practical foundations
+      for working with AI coding agents.
+    language: Python
+    stars: 63
+  - name: md2book
+    description: >-
+      Turn a Markdown book manuscript into a print-ready PDF, EPUB 3 and web
+      edition, with a QA pipeline.
+    language: TypeScript
+    stars: 3
+  - name: claude-config
+    description: >-
+      A reusable Claude Code configuration for agentic coding and software
+      engineering workflows.
+    language: Shell
+    stars: 8
+  - name: Virama-JS
+    description: >-
+      Myanmar font detector and Zawgyi ⇄ Unicode auto-converter for the
+      browser and Node.
+    language: JavaScript
+    stars: 7
+  - name: Myanmar-UniPress
+    description: >-
+      Font detecting and converting plugin for Myanmar WordPress sites.
+    language: PHP
+    stars: 7
+
+client_heading: Client architecture work
+client:
+  - name: Pocket
+    url: https://pocket.com.mm/
+    kind: Loyalty platform
+    description: >-
+      Designed the AWS architecture, built the CI/CD pipeline and deployed
+      with reliability and scale in mind; contributed to performance tuning.
+    tags: [AWS, CodeDeploy, Auto Scaling, Laravel]
+  - name: Heal by Pun Hlaing
+    url: https://play.google.com/store/apps/details?id=com.punhlaing.healapp
+    kind: Telemedicine
+    description: >-
+      Cloud architecture and CI/CD for Myanmar's first telemedicine platform
+      backend, running serverless on AWS.
+    tags: [Serverless, Lambda, API Gateway]

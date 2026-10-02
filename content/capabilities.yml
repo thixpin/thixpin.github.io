@@ -1,0 +1,36 @@
+heading: What I build and run
+intro: >-
+  15+ years across IT operations, backend development and team leadership —
+  now focused on cloud architecture, platform reliability and developer
+  tooling.
+items:
+  - title: Cloud Architecture
+    description: >-
+      Well-architected, cost-aware AWS and GCP designs: autoscaling,
+      serverless, managed services for production client workloads.
+    tags: [AWS, GCP, Lambda, API Gateway]
+  - title: Infrastructure as Code
+    description: >-
+      Reproducible environments and configuration management — versioned,
+      reviewed and applied through pipelines, not consoles.
+    tags: [Terraform, Ansible, Bash]
+  - title: CI/CD & Platform
+    description: >-
+      Delivery pipelines with automated tests, blue/green and rolling
+      deploys, and paved roads that product teams actually use.
+    tags: [GitHub Actions, CircleCI, CodeDeploy]
+  - title: Containers & Kubernetes
+    description: >-
+      Containerised services, orchestration and release workflows from a
+      single host to multi-node clusters.
+    tags: [Kubernetes, Docker, Linux]
+  - title: Observability & SRE
+    description: >-
+      Metrics, logs and alerting that shorten incidents; availability,
+      performance and capacity as engineering targets.
+    tags: [Datadog, Prometheus, Grafana]
+  - title: Agentic Developer Tooling
+    description: >-
+      Workflows and CLIs that make AI coding agents plan, verify and leave a
+      traceable record — plus training for engineers adopting them.
+    tags: [TypeScript, Python, Claude Code]

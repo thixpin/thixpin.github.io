@@ -1,0 +1,36 @@
+# Roles and dates mirror assets/resume.pdf (FR-009) — keep them in sync.
+heading: Where I've worked
+entries:
+  - role: SRE Team Lead & Cloud Solution Architect
+    org: Onenex
+    start: Jul 2022
+    end: Present
+    summary: >-
+      Cut API latency by 50% and infrastructure costs by 40%; architected
+      highly available AWS platforms, directed incident response for Pocket
+      and HEAL, and engineered Kubernetes/ArgoCD delivery for a cross-border
+      remittance platform.
+  - role: Development Team Lead & Solution Architect
+    org: Onenex
+    start: Feb 2022
+    end: Jul 2022
+    summary: >-
+      Led Node.js and Laravel backend engineering, refactored a legacy HR
+      monolith for performance and stability, and bridged development and
+      SRE teams as primary technical liaison.
+  - role: Development Team Lead
+    org: Super Seven Stars
+    start: Jul 2020
+    end: Feb 2022
+    summary: >-
+      Converted a Magento e-commerce platform to a headless React
+      architecture and designed auto-scaling infrastructure that improved
+      reliability and reduced downtime.
+  - role: Web Developer & Data Management Officer
+    org: NCDDP Myanmar
+    start: Jan 2016
+    end: Jun 2020
+    summary: >-
+      Consolidated 63 separate databases into a single source of truth with
+      an automated pipeline and built a mobile data collection platform for
+      field reporting.

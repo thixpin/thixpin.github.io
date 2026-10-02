@@ -1,0 +1,62 @@
+# Profile, SEO and site-wide data. Edit here, then `npm run build`.
+name: Soe Thura
+handle: thixpin
+title: Software Engineer & DevOps
+description: >-
+  Soe Thura (@thixpin) — Software Engineer & DevOps. AWS Community Builder
+  designing reliable AWS/GCP platforms, CI/CD, Terraform, Kubernetes, and
+  tooling for agentic software development.
+canonical: https://www.thixpin.me/
+og_description: >-
+  Reliable cloud platforms, CI/CD and infrastructure as code on AWS & GCP —
+  plus open-source tooling for agentic coding.
+og_image: assets/images/og-preview.png
+og_image_alt: Preview of Soe Thura's portfolio website
+twitter_creator: "@thixpin"
+theme_color_dark: "#09090B"
+theme_color_light: "#FAFAFA"
+
+availability: Available for Infrastructure & Platform Engineering
+location:
+  city: Bangkok
+  country: Thailand
+  country_code: TH
+email: thixpin@gmail.com
+resume: ./assets/resume.pdf
+photo: ./assets/images/thixpin.jpg
+photo_alt: Portrait of Soe Thura
+
+nav:
+  - { label: Capabilities, href: "#capabilities" }
+  - { label: Projects, href: "#projects" }
+  - { label: Experience, href: "#experience" }
+  - { label: Credentials, href: "#credentials" }
+  - { label: Contact, href: "#contact" }
+
+social:
+  github: https://github.com/thixpin
+  linkedin: https://www.linkedin.com/in/thixpin/
+  kalaung: https://kalaung.org/
+
+proof_strip:
+  - { label: In tech since, value: "2010" }
+  - { label: Certifications, value: AWS · GCP }
+  - { label: Community, value: AWS CB }
+
+hero_ctas:
+  primary: { label: View projects, href: "#projects" }
+  secondary: { label: Get in touch, href: "#contact" }
+
+contact:
+  heading: Let's build something reliable
+  blurb: >-
+    Open to cloud architecture, platform engineering and DevOps engagements —
+    remote or on-site. Send a message or reach me directly.
+  form:
+    action: https://api.web3forms.com/submit
+    subject: Portfolio enquiry via thixpin.me
+    from_name: thixpin.me portfolio
+
+footer:
+  source_url: https://github.com/thixpin/thixpin.github.io
+  credit: Built with HTML, Tailwind CSS & vanilla JS.

@@ -1,0 +1,1 @@
+I design and run reliable cloud platforms on `AWS` and `GCP` — infrastructure as code, CI/CD, Kubernetes and observability — and build open-source tooling that keeps AI coding agents accountable. AWS Community Builder based in Bangkok, Thailand.

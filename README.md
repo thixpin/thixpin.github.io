@@ -6,16 +6,27 @@ vanilla-JS block. No frameworks, no bundlers.
 
 Live at <https://www.thixpin.me/> (served by GitHub Pages).
 
+## Editing content
+
+All portfolio content lives in `content/` — YAML for structured data
+(profile/SEO in `site.yml`, `experience.yml`, `projects.yml`,
+`credentials.yml`, `capabilities.yml`) and Markdown for prose
+(`about.md`). Edit those files and rebuild; never edit `index.html`
+(a generated build artifact) or hard-code content in `src/index.eta`.
+
 ## Local development
 
 ```bash
-npm install     # installs tailwindcss (only dependency)
-npm run dev     # Tailwind watch → assets/css/style.css
+npm install     # dev-only deps: tailwindcss, eta, js-yaml, marked
+npm run render  # content + template → index.html
+npm run dev     # render once, then Tailwind watch → assets/css/style.css
 npm run serve   # http://localhost:8080 (separate terminal)
 ```
 
-One-off production build: `npm run build` (minified CSS).
-`assets/css/style.css` is a build artifact — gitignored, compiled in CI.
+One-off production build: `npm run build` (render + minified CSS).
+`index.html` and `assets/css/style.css` are build artifacts — gitignored,
+compiled in CI. Tailwind watch does not re-render the template; run
+`npm run render` again after content/template edits.
 
 ## Deployment
 
