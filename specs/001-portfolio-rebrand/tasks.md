@@ -105,7 +105,7 @@
 - [X] T026 Local build + serve per quickstart.md; Chrome check: console clean, ping animates, fonts load (SC-004) (was T024) — verified 2026-10-02: build green, served 200, console clean via Lighthouse errors-in-console audit (headless Chrome), render verified by screenshot
 - [ ] T027 JS-disabled / API-blocked test per quickstart.md: all content renders from static fallback; contact form submits natively to the form-service endpoint (SC-003, FR-010) (was T025) — partial 2026-10-02: static fallback verified by markup inspection + curl markers; native form POST untestable until the T019 access key lands
 - [X] T028 Responsive check per quickstart.md at 375px / 768px / 1280px; no horizontal scroll (was T026) — verified 2026-10-02: scrollWidth == innerWidth measured at all three widths
-- [ ] T029 Keyboard walkthrough per quickstart.md: skip link, menu toggle, every interactive element reachable, focus visible (was T027) — pending: needs an interactive browser (Chrome extension not connected this session)
+- [X] T029 Keyboard walkthrough per quickstart.md: skip link, menu toggle, every interactive element reachable, focus visible (was T027) — verified 2026-10-02 in real Chrome: skip link first-Tab + Enter→main, focus-visible rings, mobile menu Tab/Enter/Escape cycle with focus return, 30 focusables none tabindex<0; GitHub API enrichment also observed live
 - [X] T030 Lighthouse run per quickstart.md; meet SC-001 (≥95 ×4) and SC-002 (<60 KB page weight excl. fonts/photo) (was T028) — verified 2026-10-02: 100/100/100/100 (FCP 0.9 s, LCP 1.5 s, CLS 0); page weight 13.7 KB gzipped transfer (64.4 KB raw — flag: SC-002 reading)
 
 ---
