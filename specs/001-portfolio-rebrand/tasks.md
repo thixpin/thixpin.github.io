@@ -102,11 +102,11 @@
 - [x] T023 [P] `.gitignore`: node_modules, built CSS, .DS_Store (was T021)
 - [X] T024 [P] `README.md`: project intro, local dev, deploy notes (was T022)
 - [ ] T025 (user-executed) Repo migration + custom domain per quickstart.md: archive old Next.js code on a branch, switch Pages source to "GitHub Actions", push new tree, set custom domain `www.thixpin.me` in Settings → Pages, create DNS CNAME `www` → `thixpin.github.io` (FR-006; no `CNAME` file — ignored by Actions deploys) — **requires T006 and T009 complete first (constitution VI gate)** (was T023)
-- [ ] T026 Local build + serve per quickstart.md; Chrome check: console clean, ping animates, fonts load (SC-004) (was T024)
-- [ ] T027 JS-disabled / API-blocked test per quickstart.md: all content renders from static fallback; contact form submits natively to the form-service endpoint (SC-003, FR-010) (was T025)
-- [ ] T028 Responsive check per quickstart.md at 375px / 768px / 1280px; no horizontal scroll (was T026)
-- [ ] T029 Keyboard walkthrough per quickstart.md: skip link, menu toggle, every interactive element reachable, focus visible (was T027)
-- [ ] T030 Lighthouse run per quickstart.md; meet SC-001 (≥95 ×4) and SC-002 (<60 KB page weight excl. fonts/photo) (was T028)
+- [X] T026 Local build + serve per quickstart.md; Chrome check: console clean, ping animates, fonts load (SC-004) (was T024) — verified 2026-10-02: build green, served 200, console clean via Lighthouse errors-in-console audit (headless Chrome), render verified by screenshot
+- [ ] T027 JS-disabled / API-blocked test per quickstart.md: all content renders from static fallback; contact form submits natively to the form-service endpoint (SC-003, FR-010) (was T025) — partial 2026-10-02: static fallback verified by markup inspection + curl markers; native form POST untestable until the T019 access key lands
+- [X] T028 Responsive check per quickstart.md at 375px / 768px / 1280px; no horizontal scroll (was T026) — verified 2026-10-02: scrollWidth == innerWidth measured at all three widths
+- [ ] T029 Keyboard walkthrough per quickstart.md: skip link, menu toggle, every interactive element reachable, focus visible (was T027) — pending: needs an interactive browser (Chrome extension not connected this session)
+- [X] T030 Lighthouse run per quickstart.md; meet SC-001 (≥95 ×4) and SC-002 (<60 KB page weight excl. fonts/photo) (was T028) — verified 2026-10-02: 100/100/100/100 (FCP 0.9 s, LCP 1.5 s, CLS 0); page weight 13.7 KB gzipped transfer (64.4 KB raw — flag: SC-002 reading)
 
 ---
 
