@@ -121,6 +121,11 @@ content baked in.
   `build/render.mjs` from the `src/index.eta` template; the generated
   `index.html` is a gitignored build artifact and the template contains no
   portfolio content.
+- FR-013: Motion design — staggered hero entrance, scroll-triggered section
+  reveals, eyebrow underline grow, portrait float, and a scroll progress bar;
+  transform/opacity only (CLS stays 0), one easing curve, content never
+  hidden without JS, and everything disabled under
+  `prefers-reduced-motion` (constitution IV).
 
 ## Success Criteria
 

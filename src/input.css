@@ -74,6 +74,22 @@
     @apply font-mono text-xs uppercase tracking-[0.2em] text-accent;
   }
 
+  /* Designer flourish: short accent underline that grows in on reveal. */
+  .eyebrow::after {
+    content: '';
+    display: block;
+    width: 2.5rem;
+    height: 2px;
+    margin-top: 0.5rem;
+    background: rgb(var(--c-accent));
+    transform: scaleX(1);
+    transform-origin: 0 50%;
+    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.25s;
+  }
+  .js [data-reveal]:not(.is-revealed) .eyebrow::after {
+    transform: scaleX(0);
+  }
+
   .section-title {
     @apply mt-3 text-3xl font-bold tracking-tight text-ink sm:text-4xl;
   }
@@ -149,11 +165,114 @@
   :root[data-theme='dark'] .icon-moon {
     display: none;
   }
+
+  /* Motion (FR-013): transform/opacity only, one easing curve.
+     .anim-rise-t is transform-only — safe for LCP candidates (h1, hero
+     paragraph, portrait), which must never start at opacity 0. */
+  .anim-rise {
+    animation: rise-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: var(--ad, 0ms);
+  }
+  .anim-rise-t {
+    animation: rise-in-t 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: var(--ad, 0ms);
+  }
+  .anim-float {
+    animation: float 6s ease-in-out 1.6s infinite;
+  }
+
+  /* Scroll reveal: hidden state only when JS is present (.js on <html>),
+     so content stays visible with JS disabled (constitution II). */
+  .js [data-reveal] {
+    opacity: 0;
+    transform: translateY(28px);
+    transition:
+      opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1) var(--rd, 0ms),
+      transform 0.65s cubic-bezier(0.22, 1, 0.36, 1) var(--rd, 0ms);
+  }
+  .js [data-reveal].is-revealed {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Scroll progress: CSS scroll-driven only; invisible where unsupported. */
+  .scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 2px;
+    width: 100%;
+    z-index: 60;
+    pointer-events: none;
+    background: rgb(var(--c-accent));
+    transform: scaleX(0);
+    transform-origin: 0 50%;
+  }
+  @supports (animation-timeline: scroll()) {
+    .scroll-progress {
+      animation: scroll-progress linear both;
+      animation-timeline: scroll();
+    }
+  }
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes rise-in-t {
+  from {
+    transform: translateY(18px);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+@keyframes scroll-progress {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+
+  /* Constitution IV: motion opts out completely — content fully visible. */
+  .js [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .js [data-reveal]:not(.is-revealed) .eyebrow::after {
+    transform: scaleX(1);
+  }
+  .anim-rise,
+  .anim-rise-t,
+  .anim-float {
+    animation: none;
+  }
+  .scroll-progress {
+    display: none;
   }
 
   *,

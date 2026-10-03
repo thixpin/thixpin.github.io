@@ -122,6 +122,8 @@
 - [X] T036 Theme toggle: header button (accessible name/state, keyboard reachable), synchronous head init snippet (localStorage → `data-theme`, else system), persistence + toggle JS in the inline block
 - [X] T037 Re-validation: build green; generated HTML greps (title, Bangkok, dates, 6 repos, CKA, access_key empty); Chrome: theme default=system, toggle flips + persists across reload, clear → system again; contrast script both palettes (AA); responsive probe 375/768/1280; keyboard walkthrough incl. toggle; console zero failures; Lighthouse ≥95 ×4 — verified 2026-10-02: all pass; Lighthouse 100×4 (light theme run; dark was the prior 100×4 run), FCP 1.1 s / LCP 1.7 s / CLS 0, 14.7 KB gzipped transfer; found+fixed btn-primary light-mode hover contrast via new `on-accent` token
 
+- [X] T038 Motion design (FR-013, added 2026-10-03): hero entrance stagger (`.anim-rise`/`.anim-rise-t` — LCP candidates transform-only), scroll reveals via IntersectionObserver gated by a `.js` html class, eyebrow underline grow, portrait float, CSS scroll-driven progress bar (`@supports animation-timeline`), full `prefers-reduced-motion` opt-out — in `src/input.css`, `src/index.eta`
+
 ---
 
 ## Dependencies & Execution Order

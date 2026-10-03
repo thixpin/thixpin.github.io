@@ -13,8 +13,10 @@
     <meta name="theme-color" media="(prefers-color-scheme: dark)" content="<%= it.site.theme_color_dark %>" />
     <link rel="canonical" href="<%= it.site.canonical %>" />
 
-    <!-- Theme init: apply the persisted choice before first paint (no FOUC). -->
+    <!-- Theme init: apply the persisted choice before first paint (no FOUC).
+         The js class gates scroll-reveal hiding so content is never hidden without JS. -->
     <script>
+      document.documentElement.classList.add('js');
       try {
         var t = localStorage.getItem('theme');
         if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t;
@@ -83,6 +85,7 @@
   </head>
 
   <body class="min-h-screen">
+    <div class="scroll-progress" aria-hidden="true"></div>
     <a
       href="#main"
       class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-md focus:bg-ink focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-bg"
@@ -150,7 +153,7 @@
         <div class="bg-grid pointer-events-none absolute inset-0" aria-hidden="true"></div>
         <div class="container-site relative grid items-center gap-12 py-20 sm:py-28 lg:grid-cols-[1fr_auto]">
           <div>
-            <p class="inline-flex items-center gap-3 rounded-full border border-line bg-surface/80 px-3 py-1.5 font-mono text-xs text-muted">
+            <p class="anim-rise inline-flex items-center gap-3 rounded-full border border-line bg-surface/80 px-3 py-1.5 font-mono text-xs text-muted">
               <span class="relative flex h-2.5 w-2.5" aria-hidden="true">
                 <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-75"></span>
                 <span class="relative inline-flex h-2.5 w-2.5 rounded-full bg-accent"></span>
@@ -158,17 +161,17 @@
               <span><span class="sr-only">Status: </span><%= it.site.availability %></span>
             </p>
 
-            <h1 id="hero-title" class="mt-8 text-4xl font-extrabold tracking-tight text-ink sm:text-6xl">
+            <h1 id="hero-title" class="anim-rise-t mt-8 text-4xl font-extrabold tracking-tight text-ink sm:text-6xl" style="--ad: 60ms">
               <%= it.site.name %><span class="text-accent">.</span>
             </h1>
-            <p class="mt-4 text-xl font-semibold text-ink sm:text-2xl">
+            <p class="anim-rise mt-4 text-xl font-semibold text-ink sm:text-2xl" style="--ad: 120ms">
               <%= it.hero.title_html %>
             </p>
-            <p class="mt-6 max-w-2xl text-base leading-relaxed text-muted sm:text-lg">
+            <p class="anim-rise-t mt-6 max-w-2xl text-base leading-relaxed text-muted sm:text-lg" style="--ad: 160ms">
               <%= it.hero.about_html %>
             </p>
 
-            <div class="mt-10 flex flex-wrap gap-3">
+            <div class="anim-rise mt-10 flex flex-wrap gap-3" style="--ad: 230ms">
               <a class="btn-primary" href="<%= it.site.hero_ctas.primary.href %>">
                 <%= it.site.hero_ctas.primary.label %>
                 <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
@@ -176,7 +179,7 @@
               <a class="btn-ghost" href="<%= it.site.hero_ctas.secondary.href %>"><%= it.site.hero_ctas.secondary.label %></a>
             </div>
 
-            <dl class="mt-12 grid max-w-xl grid-cols-3 gap-4 border-t border-line pt-6">
+            <dl class="anim-rise mt-12 grid max-w-xl grid-cols-3 gap-4 border-t border-line pt-6" style="--ad: 300ms">
 <% it.site.proof_strip.forEach((p) => { %>
               <div>
                 <dt class="font-mono text-xs uppercase tracking-wider text-muted"><%= p.label %></dt>
@@ -186,8 +189,8 @@
             </dl>
           </div>
 
-          <figure class="mx-auto w-56 sm:w-64 lg:w-72">
-            <div class="rounded-2xl border border-line bg-surface p-2 transition duration-300 hover:border-accent/40 hover:shadow-glow">
+          <figure class="anim-rise-t mx-auto w-56 sm:w-64 lg:w-72" style="--ad: 150ms">
+            <div class="anim-float rounded-2xl border border-line bg-surface p-2 transition duration-300 hover:border-accent/40 hover:shadow-glow">
               <img
                 src="<%= it.site.photo %>"
                 alt="<%= it.site.photo_alt %>"
@@ -205,15 +208,17 @@
       <!-- ============ Capabilities ============ -->
       <section id="capabilities" aria-labelledby="capabilities-title" class="section">
         <div class="container-site">
-          <p class="eyebrow">01 / Capabilities</p>
-          <h2 id="capabilities-title" class="section-title"><%= it.capabilities.heading %></h2>
-          <p class="mt-4 max-w-2xl text-muted">
-            <%= it.capabilities.intro %>
-          </p>
+          <div data-reveal>
+            <p class="eyebrow">01 / Capabilities</p>
+            <h2 id="capabilities-title" class="section-title"><%= it.capabilities.heading %></h2>
+            <p class="mt-4 max-w-2xl text-muted">
+              <%= it.capabilities.intro %>
+            </p>
+          </div>
 
           <ul class="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3" role="list">
-<% it.capabilities.items.forEach((c) => { %>
-            <li class="card card-interactive">
+<% it.capabilities.items.forEach((c, ci) => { %>
+            <li class="card card-interactive" data-reveal style="--rd: <%= ci * 70 %>ms">
               <h3 class="text-lg font-semibold text-ink"><%= c.title %></h3>
               <p class="mt-2 text-sm leading-relaxed text-muted"><%= c.description %></p>
               <p class="mt-4 flex flex-wrap gap-2"><% c.tags.forEach((t, ti) => { %><span class="tag<%= ti === 0 ? ' tag-accent' : '' %>"><%= t %></span><% }) %></p>
@@ -226,7 +231,7 @@
       <!-- ============ Projects ============ -->
       <section id="projects" aria-labelledby="projects-title" class="section">
         <div class="container-site">
-          <div class="flex flex-wrap items-end justify-between gap-4">
+          <div class="flex flex-wrap items-end justify-between gap-4" data-reveal>
             <div>
               <p class="eyebrow">02 / Projects</p>
               <h2 id="projects-title" class="section-title"><%= it.projects.heading %></h2>
@@ -239,8 +244,8 @@
 
           <!-- Repo stats are fetched from the GitHub API at build time (build/render.mjs); no browser API calls. -->
           <ul id="repo-grid" class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3" role="list">
-<% it.projects.repos.forEach((r) => { %>
-            <li class="card card-interactive relative flex flex-col">
+<% it.projects.repos.forEach((r, ri) => { %>
+            <li class="card card-interactive relative flex flex-col" data-reveal style="--rd: <%= ri * 70 %>ms">
               <div class="flex items-start justify-between gap-3">
                 <h3 class="font-mono text-base font-medium text-ink">
                   <a class="after:absolute after:inset-0 after:rounded-xl" href="<%= r.url %>" target="_blank" rel="noopener"><%= r.name %></a>
@@ -267,10 +272,10 @@
 <% }) %>
           </ul>
 
-          <h3 class="mt-16 font-mono text-xs uppercase tracking-[0.2em] text-muted"><%= it.projects.client_heading %></h3>
+          <h3 class="mt-16 font-mono text-xs uppercase tracking-[0.2em] text-muted" data-reveal><%= it.projects.client_heading %></h3>
           <ul class="mt-4 grid gap-4 md:grid-cols-2" role="list">
-<% it.projects.client.forEach((c) => { %>
-            <li class="card card-interactive">
+<% it.projects.client.forEach((c, ci) => { %>
+            <li class="card card-interactive" data-reveal style="--rd: <%= ci * 90 %>ms">
               <div class="flex flex-wrap items-baseline justify-between gap-2">
                 <h4 class="text-lg font-semibold text-ink"><a class="hover:text-accent" href="<%= c.url %>" target="_blank" rel="noopener"><%= c.name %> ↗</a></h4>
                 <span class="font-mono text-xs text-muted"><%= c.kind %></span>
@@ -286,12 +291,14 @@
       <!-- ============ Experience ============ -->
       <section id="experience" aria-labelledby="experience-title" class="section">
         <div class="container-site">
-          <p class="eyebrow">03 / Experience</p>
-          <h2 id="experience-title" class="section-title"><%= it.experience.heading %></h2>
+          <div data-reveal>
+            <p class="eyebrow">03 / Experience</p>
+            <h2 id="experience-title" class="section-title"><%= it.experience.heading %></h2>
+          </div>
           <!-- Roles and dates mirror assets/resume.pdf (FR-009). -->
           <ol class="mt-12 space-y-10 border-l border-line pl-7" role="list">
 <% it.experience.entries.forEach((e, ei) => { %>
-            <li class="relative">
+            <li class="relative" data-reveal style="--rd: <%= ei * 90 %>ms">
               <span class="absolute -left-[33px] top-1.5 h-2.5 w-2.5 rounded-full <%= ei === 0 ? 'bg-accent' : 'bg-line' %>" aria-hidden="true"></span>
               <div class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
                 <h3 class="text-lg font-semibold text-ink"><%= e.role %> · <%= e.org %></h3>
@@ -309,9 +316,11 @@
       <!-- ============ Credentials ============ -->
       <section id="credentials" aria-labelledby="credentials-title" class="section">
         <div class="container-site">
-          <p class="eyebrow">04 / Credentials</p>
-          <h2 id="credentials-title" class="section-title"><%= it.credentials.heading %></h2>
-          <ul class="mt-10 flex flex-wrap gap-3" role="list">
+          <div data-reveal>
+            <p class="eyebrow">04 / Credentials</p>
+            <h2 id="credentials-title" class="section-title"><%= it.credentials.heading %></h2>
+          </div>
+          <ul class="mt-10 flex flex-wrap gap-3" role="list" data-reveal style="--rd: 90ms">
 <% it.credentials.badges.forEach((b) => { %>
 <% if (b.url) { %>
             <li><a class="tag <%= b.accent ? 'tag-accent px-3 py-1.5 hover:shadow-glow' : 'px-3 py-1.5 hover:border-accent/40 hover:text-ink' %>" href="<%= b.url %>" target="_blank" rel="noopener"><%= b.label %></a></li>
@@ -320,7 +329,7 @@
 <% } %>
 <% }) %>
           </ul>
-          <p class="mt-8 max-w-2xl text-sm leading-relaxed text-muted">
+          <p class="mt-8 max-w-2xl text-sm leading-relaxed text-muted" data-reveal style="--rd: 160ms">
             <%= it.credentials.community_html %>
           </p>
         </div>
@@ -329,7 +338,7 @@
       <!-- ============ Contact ============ -->
       <section id="contact" aria-labelledby="contact-title" class="section">
         <div class="container-site grid gap-12 lg:grid-cols-2">
-          <div>
+          <div data-reveal>
             <p class="eyebrow">05 / Contact</p>
             <h2 id="contact-title" class="section-title"><%= it.site.contact.heading %></h2>
             <p class="mt-4 max-w-md text-muted">
@@ -368,6 +377,8 @@
           <form
             id="contact-form"
             class="card space-y-5"
+            data-reveal
+            style="--rd: 120ms"
             method="POST"
             action="<%= it.site.contact.form.action %>"
             data-mailto="<%= it.site.email %>"
@@ -446,6 +457,34 @@
         document.querySelectorAll('main section[id]').forEach((section) => observer.observe(section));
 
         document.getElementById('year').textContent = new Date().getFullYear();
+
+        // ---- Scroll reveal (FR-013) ----
+        const revealEls = [...document.querySelectorAll('[data-reveal]')];
+        const reveal = (el) => el.classList.add('is-revealed');
+        if (matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) {
+          revealEls.forEach(reveal);
+        } else {
+          const revealObs = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((en) => {
+                if (!en.isIntersecting) return;
+                reveal(en.target);
+                revealObs.unobserve(en.target);
+              });
+            },
+            { rootMargin: '0px 0px -10% 0px', threshold: 0.1 }
+          );
+          revealEls.forEach((el) => revealObs.observe(el));
+          // Insurance: if the observer never fires (bfcache, print), show
+          // whatever is already in the viewport.
+          addEventListener('load', () =>
+            setTimeout(() => {
+              revealEls.forEach((el) => {
+                if (!el.classList.contains('is-revealed') && el.getBoundingClientRect().top < innerHeight) reveal(el);
+              });
+            }, 1500)
+          );
+        }
 
         // ---- Theme toggle ----
         const themeToggle = document.getElementById('theme-toggle');
