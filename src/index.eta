@@ -554,9 +554,9 @@
               audio = audio || new (window.AudioContext || window.webkitAudioContext)();
               audio.resume();
             } catch {}
-            playTerminal(true, 62, 18);
+            playTerminal(true, 110, 18);
           });
-          playTerminal(false, 34, 12);
+          playTerminal(false, 110, 14);
         }
 
         // ---- Scroll reveal (FR-013) ----
