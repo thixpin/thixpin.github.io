@@ -130,6 +130,35 @@
     @apply text-ink;
   }
 
+  /* Terminal window (hero about, FR-013) */
+  .terminal {
+    @apply overflow-hidden rounded-xl border border-line bg-surface;
+  }
+  .terminal-bar {
+    @apply flex items-center gap-1.5 border-b border-line bg-bg/60 px-4 py-2.5;
+  }
+  .terminal-dot {
+    @apply h-2.5 w-2.5 rounded-full;
+  }
+  .terminal-title {
+    @apply ml-2 font-mono text-xs text-muted;
+  }
+  .terminal-body {
+    @apply px-4 py-4 font-mono text-sm leading-relaxed sm:px-5;
+  }
+  .terminal-caret[hidden] {
+    display: none;
+  }
+  .terminal-caret {
+    display: inline-block;
+    width: 0.55em;
+    height: 1.05em;
+    margin-left: 2px;
+    vertical-align: text-bottom;
+    background: rgb(var(--c-accent));
+    animation: caret-blink 1.1s steps(1) infinite;
+  }
+
   .field {
     @apply mt-2 w-full rounded-lg border border-line bg-bg px-4 py-3 text-sm text-ink placeholder:text-muted/60 transition focus:border-accent/60 focus:outline-none focus:ring-2 focus:ring-accent/30;
   }
@@ -251,6 +280,11 @@
     transform: scaleX(1);
   }
 }
+@keyframes caret-blink {
+  50% {
+    opacity: 0;
+  }
+}
 
 @media (prefers-reduced-motion: reduce) {
   html {
@@ -273,6 +307,9 @@
   }
   .scroll-progress {
     display: none;
+  }
+  .terminal-caret {
+    animation: none;
   }
 
   *,

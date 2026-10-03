@@ -121,8 +121,11 @@ content baked in.
   `build/render.mjs` from the `src/index.eta` template; the generated
   `index.html` is a gitignored build artifact and the template contains no
   portfolio content.
-- FR-013: Motion design — staggered hero entrance, scroll-triggered section
-  reveals, eyebrow underline grow, portrait float, and a scroll progress bar;
+- FR-013: Motion design — staggered hero entrance, the hero about-text as a
+  terminal window (`thixpin@codeBook:~`, typed `whoami` + streamed output,
+  blinking caret, replay button with WebAudio key-click sound — sound only on
+  the replay gesture per autoplay policy), scroll-triggered section reveals,
+  eyebrow underline grow, portrait float, and a scroll progress bar;
   transform/opacity only (CLS stays 0), one easing curve, content never
   hidden without JS, and everything disabled under
   `prefers-reduced-motion` (constitution IV).

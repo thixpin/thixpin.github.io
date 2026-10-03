@@ -167,9 +167,27 @@
             <p class="anim-rise mt-4 text-xl font-semibold text-ink sm:text-2xl" style="--ad: 120ms">
               <%= it.hero.title_html %>
             </p>
-            <p class="anim-rise-t mt-6 max-w-2xl text-base leading-relaxed text-muted sm:text-lg" style="--ad: 160ms">
-              <%= it.hero.about_html %>
-            </p>
+            <div id="hero-terminal" class="anim-rise-t terminal mt-6 max-w-2xl" style="--ad: 160ms">
+              <div class="terminal-bar">
+                <span class="terminal-dot bg-accent/90" aria-hidden="true"></span>
+                <span class="terminal-dot bg-muted/40" aria-hidden="true"></span>
+                <span class="terminal-dot bg-line" aria-hidden="true"></span>
+                <span class="terminal-title">thixpin@codeBook:~</span>
+                <button
+                  type="button"
+                  id="term-replay"
+                  class="ml-auto inline-flex h-6 w-6 items-center justify-center rounded text-muted transition-colors hover:text-accent"
+                  aria-label="Replay the typing animation with sound"
+                >
+                  <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 2.64-6.36L3 8" /><path d="M3 3v5h5" /></svg>
+                </button>
+              </div>
+              <div class="terminal-body">
+                <p aria-hidden="true"><span class="text-accent">$</span> <span data-term-cmd>whoami</span><span class="terminal-caret" data-term-cmd-caret hidden></span></p>
+                <p class="mt-3 text-muted" data-term-out><%= it.hero.about_html %></p>
+                <p class="mt-3" data-term-end aria-hidden="true"><span class="text-accent">$</span> <span class="terminal-caret"></span></p>
+              </div>
+            </div>
 
             <div class="anim-rise mt-10 flex flex-wrap gap-3" style="--ad: 230ms">
               <a class="btn-primary" href="<%= it.site.hero_ctas.primary.href %>">
@@ -457,6 +475,89 @@
         document.querySelectorAll('main section[id]').forEach((section) => observer.observe(section));
 
         document.getElementById('year').textContent = new Date().getFullYear();
+
+        // ---- Hero terminal: typed command, streamed output, replay with sound (FR-013) ----
+        const term = document.getElementById('hero-terminal');
+        if (term) {
+          const cmdEl = term.querySelector('[data-term-cmd]');
+          const cmdCaret = term.querySelector('[data-term-cmd-caret]');
+          const outEl = term.querySelector('[data-term-out]');
+          const endEl = term.querySelector('[data-term-end]');
+          const replayBtn = document.getElementById('term-replay');
+          const cmdText = cmdEl.textContent;
+          const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+          const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+
+          // Key-click synth: tiny WebAudio blips, no audio files. Created on
+          // the replay click (a user gesture), as autoplay policy requires.
+          let audio = null;
+          const blip = (freq, gain, dur) => {
+            if (!audio) return;
+            const t = audio.currentTime;
+            const osc = audio.createOscillator();
+            const g = audio.createGain();
+            osc.type = 'square';
+            osc.frequency.value = freq;
+            g.gain.setValueAtTime(gain, t);
+            g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+            osc.connect(g).connect(audio.destination);
+            osc.start(t);
+            osc.stop(t + dur + 0.01);
+          };
+          const keyClick = () => blip(1300 + Math.random() * 900, 0.03, 0.03);
+          const enterThock = () => blip(320, 0.05, 0.08);
+
+          // Split the output into word tokens once (keeps the styled spans).
+          const toks = [];
+          [...outEl.childNodes].forEach((n) => {
+            if (n.nodeType === Node.TEXT_NODE) {
+              const frag = document.createDocumentFragment();
+              n.textContent.split(/(\s+)/).forEach((w) => {
+                if (!w) return;
+                const s = document.createElement('span');
+                s.textContent = w;
+                toks.push(s);
+                frag.appendChild(s);
+              });
+              outEl.replaceChild(frag, n);
+            } else {
+              toks.push(n);
+            }
+          });
+
+          let running = false;
+          const playTerminal = async (withSound, charMs, tokMs) => {
+            if (running || reducedMotion.matches) return;
+            running = true;
+            toks.forEach((t) => (t.style.opacity = '0'));
+            endEl.style.visibility = 'hidden'; // keeps its line box: no layout shift
+            cmdEl.textContent = '';
+            cmdCaret.hidden = false;
+            for (const ch of cmdText) {
+              cmdEl.textContent += ch;
+              if (withSound) keyClick();
+              await sleep(charMs + Math.random() * charMs * 0.8);
+            }
+            await sleep(240);
+            if (withSound) enterThock();
+            cmdCaret.hidden = true;
+            for (const t of toks) {
+              t.style.opacity = '1';
+              await sleep(tokMs);
+            }
+            endEl.style.visibility = '';
+            running = false;
+          };
+
+          replayBtn.addEventListener('click', () => {
+            try {
+              audio = audio || new (window.AudioContext || window.webkitAudioContext)();
+              audio.resume();
+            } catch {}
+            playTerminal(true, 62, 18);
+          });
+          playTerminal(false, 34, 12);
+        }
 
         // ---- Scroll reveal (FR-013) ----
         const revealEls = [...document.querySelectorAll('[data-reveal]')];
