@@ -193,7 +193,7 @@
                 alt="<%= it.site.photo_alt %>"
                 width="640"
                 height="640"
-                class="aspect-square w-full rounded-xl object-cover grayscale transition duration-500 hover:grayscale-0"
+                class="aspect-square w-full rounded-xl object-cover"
                 fetchpriority="high"
               />
             </div>
